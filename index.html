@@ -24,19 +24,8 @@ licenses. See license.html for details.
   <head>
     <title>quick-lint-js finds JavaScript bugs</title>
     <meta charset="utf-8" />
+    <link href="main.css" rel="stylesheet" />
     <style>
-      body {
-        font-family: sans-serif;
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 45rem;
-      }
-
-      figure {
-        margin: 0;
-        margin-bottom: 1rem;
-      }
-
       .feature-comparison table {
         border-collapse: collapse;
         width: 100%;
@@ -79,49 +68,6 @@ licenses. See license.html for details.
       .feature-comparison figcaption p {
         margin-top: 0.25em;
         margin-bottom: 0.25em;
-      }
-
-      h1 {
-        margin-top: 1rem;
-      }
-
-      header nav {
-        margin-top: 1rem;
-        text-align: right;
-      }
-      header nav > ul {
-        margin: 0;
-        padding: 0;
-      }
-      header nav li {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-      header nav li > a {
-        padding: 0;
-      }
-
-      header {
-        display: grid;
-        grid-template:
-          "title nav"
-          "tag-line nav";
-      }
-      header > h1 {
-        grid-area: title;
-      }
-      header > .tag-line {
-        grid-area: tag-line;
-      }
-      header > nav {
-        grid-area: nav;
-      }
-
-      footer,
-      h2 {
-        border-top: 1px solid #ccc;
-        padding-top: 1rem;
       }
 
       .install-options {
@@ -208,8 +154,7 @@ licenses. See license.html for details.
       <h2>Install quick-lint-js</h2>
       <ul class="install-options">
         <li>
-          <a
-            href="https://github.com/quick-lint/quick-lint-js/blob/master/docs/INSTALLING.md#installing-quick-lint-js"
+          <a href="install.html#install-cli"
             ><img
               class="install-logo"
               src="gnome-terminal.svg"
@@ -220,8 +165,18 @@ licenses. See license.html for details.
           >
         </li>
         <li>
-          <a
-            href="https://github.com/quick-lint/quick-lint-js/tree/master/plugin/vim#quick-lint-js-vim-plugin"
+          <a href="https://www.npmjs.com/package/quick-lint-js"
+            ><img
+              class="install-logo"
+              src="npm.svg"
+              alt=""
+              aria-labeled-by="install-npm"
+            />
+            <span id="install-npm">install CLI on npm</span></a
+          >
+        </li>
+        <li>
+          <a href="install.html#install-vim"
             ><img
               class="install-logo"
               src="vim.gif"
@@ -244,6 +199,7 @@ licenses. See license.html for details.
           >
         </li>
       </ul>
+      <p><a href="install.html">see all installation options</a></p>
 
       <h2 id="linter-feature-comparison">Features</h2>
       <figure class="feature-comparison">
@@ -293,14 +249,8 @@ licenses. See license.html for details.
             </tr>
             <tr>
               <th>easy npm install</th>
-              <td class="bad quick-lint-js">
-                <span aria-label="hard">❌</span
-                ><span
-                  aria-label="planned"
-                  title="planned"
-                  class="footnote-marker"
-                  >&nbsp;*</span
-                >
+              <td class="good quick-lint-js">
+                <span aria-label="easy">✅</span>
               </td>
               <td class="good"><span aria-label="easy">✅</span></td>
               <td class="good"><span aria-label="easy">✅</span></td>
@@ -429,7 +379,12 @@ licenses. See license.html for details.
                   ></span
                 >
               </td>
-              <td class="bad"><span aria-label="no">❌</span></td>
+              <td class="meh">
+                <a
+                  href="https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno"
+                  >VS Code</a
+                >
+              </td>
             </tr>
             <tr>
               <th>lint rules</th>
