@@ -75,3 +75,51 @@ main > h2:first-child {
   border-top: 0;
   padding-top: 0;
 }
+
+@media (prefers-color-scheme: dark) {
+  a:link {
+    color: #3398e0;
+  }
+  a:visited {
+    color: #979ef8;
+  }
+  body {
+    background-color: #002b36;
+    color: white;
+  }
+  .os-logo[src="macos.svg"] {
+    filter: invert(100%);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background: white;
+    color: black;
+  }
+}
+
+/* Comparison tables */
+.comparison td.good {
+  background-color: #ddffdd;
+}
+.comparison td.bad {
+  background-color: #ffdddd;
+}
+.comparison td.meh {
+  background-color: #ffeecc;
+}
+@media (prefers-color-scheme: dark) {
+  .comparison td.bad {
+    color: rgb(255, 255, 255);
+    background-color: #772222;
+  }
+  .comparison td.meh {
+    color: rgb(255, 255, 255);
+    background-color: #776622;
+  }
+  .comparison td.good {
+    color: rgb(255, 255, 255);
+    background-color: #226622;
+  }
+}
