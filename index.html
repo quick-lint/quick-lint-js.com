@@ -1,25 +1,6 @@
 <!DOCTYPE html>
-<!--
-quick-lint-js finds bugs in JavaScript programs.
-Copyright (C) 2020  Matthew Glazar
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
--->
-<!--
-Other files may have different copyright and may be licensed under different
-licenses. See license.html for details.
--->
+<!-- Copyright (C) 2020  Matthew Glazar -->
+<!-- See end of file for extended copyright information. -->
 <html>
   <head>
     <title>quick-lint-js finds JavaScript bugs</title>
@@ -203,6 +184,7 @@ licenses. See license.html for details.
               <th><a href="https://jshint.com/">JSHint</a></th>
               <th><a href="https://rslint.org/">RSLint</a></th>
               <th><a href="https://lint.deno.land/">deno lint</a></th>
+              <th><a href="https://rome.tools/">Rome</a></th>
             </tr>
           </thead>
           <tbody>
@@ -229,10 +211,15 @@ licenses. See license.html for details.
                   >🐇</span
                 ><br /><span id="feature-speed-deno-lint-capable">capable</span>
               </td>
+              <td class="bad">
+                <span aria-labelled-by="feature-speed-rome-slow">🐢</span
+                ><br /><span id="feature-speed-rome-slow">slow</span>
+              </td>
             </tr>
             <tr>
               <th>license</th>
               <td class="good quick-lint-js">free<br />GPLv3</td>
+              <td class="meh">open source<br />MIT</td>
               <td class="meh">open source<br />MIT</td>
               <td class="meh">open source<br />MIT</td>
               <td class="meh">open source<br />MIT</td>
@@ -258,6 +245,7 @@ licenses. See license.html for details.
                 >
               </td>
               <td class="bad"><span aria-label="hard">❌</span></td>
+              <td class="good"><span aria-label="easy">✅</span></td>
             </tr>
             <tr>
               <th>easy setup</th>
@@ -273,6 +261,9 @@ licenses. See license.html for details.
               </td>
               <td class="good">
                 <span aria-label="easy">✅</span><br />zero config
+              </td>
+              <td class="meh">
+                <span aria-label="hard">❌</span><br />config or <tt>init</tt>
               </td>
             </tr>
             <tr>
@@ -306,6 +297,7 @@ licenses. See license.html for details.
                 >
               </td>
               <td class="good"><span aria-label="yes">✅</span></td>
+              <td class="good"><span aria-label="yes">✅</span></td>
             </tr>
             <tr>
               <th>TypeScript</th>
@@ -337,6 +329,7 @@ licenses. See license.html for details.
                   >&nbsp;*</span
                 >
               </td>
+              <td class="good"><span aria-label="yes">✅</span></td>
               <td class="good"><span aria-label="yes">✅</span></td>
             </tr>
             <tr>
@@ -376,6 +369,12 @@ licenses. See license.html for details.
                   >VS Code</a
                 >
               </td>
+              <td class="meh">
+                <a
+                  href="https://marketplace.visualstudio.com/items?itemName=rome.rome"
+                  >VS Code</a
+                >
+              </td>
             </tr>
             <tr>
               <th>lint rules</th>
@@ -393,6 +392,9 @@ licenses. See license.html for details.
                 >
               </td>
               <td class="meh"><a href="https://lint.deno.land/">some</a></td>
+              <td class="meh">
+                <a href="https://rome.tools/docs/lint/rules/">some</a>
+              </td>
             </tr>
             <tr>
               <th>stable</th>
@@ -401,6 +403,7 @@ licenses. See license.html for details.
               </td>
               <td class="good"><span aria-label="stable">✅</span></td>
               <td class="good"><span aria-label="stable">✅</span></td>
+              <td class="bad"><span aria-label="unstable">❌</span></td>
               <td class="bad"><span aria-label="unstable">❌</span></td>
               <td class="bad"><span aria-label="unstable">❌</span></td>
             </tr>
@@ -433,3 +436,27 @@ licenses. See license.html for details.
     </footer>
   </body>
 </html>
+
+<!--
+quick-lint-js finds bugs in JavaScript programs.
+Copyright (C) 2020  Matthew Glazar
+
+This file is part of quick-lint-js.
+
+quick-lint-js is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+quick-lint-js is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with quick-lint-js.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<!--
+Other files may have different copyright and may be licensed under different
+licenses. See license.html for details.
+-->
