@@ -78,16 +78,28 @@
         grid-area: windows;
       }
 
-      /* Make the entire cell clickable. */
+      /* Make the entire cell clickable. (How does this even work???) */
+      .install-comparison table {
+        height: 0;
+      }
+      .install-comparison td {
+        height: 100%;
+        padding: 0;
+      }
       .install-comparison td > a {
-        display: block;
+        align-items: center;
+        display: flex;
+        height: 100%;
+        justify-content: center;
         text-decoration: none;
-        /* See rule: .install-comparison td */
-        margin: -0.5em -1em;
-        padding: 0.5em 1em;
       }
       .install-comparison td > a:hover {
-        background-color: rgba(255, 255, 255, 0.3);
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+      @media (prefers-color-scheme: dark) {
+        .install-comparison td > a:hover {
+          background-color: rgba(255, 255, 255, 0.3);
+        }
       }
 
       /* Add lots of spacing between different install procedures so people
@@ -105,6 +117,10 @@
         padding-left: 6ch;
         text-indent: -6ch;
         white-space: normal;
+      }
+
+      code kbd::before {
+        content: '$ ';
       }
     </style>
   </head>
@@ -222,17 +238,19 @@
               </td>
               <td class="meh">
                 <a href="#npm"
-                  ><span aria-label="installed">✅</span
                   ><span
-                    aria-label="not installed globally"
-                    title="not installed globally"
-                    class="footnote-marker"
-                    >&nbsp;*</span
+                    ><span aria-label="installed">✅</span
+                    ><span
+                      aria-label="not installed globally"
+                      title="not installed globally"
+                      class="footnote-marker"
+                      >&nbsp;*</span
+                    ></span
                   ></a
                 >
               </td>
-              <td class="bad"><span aria-label="not installed">❌</span></td>
-              <td class="bad"><span aria-label="not installed">❌</span></td>
+              <td><span aria-label="not installed"></span></td>
+              <td><span aria-label="not installed"></span></td>
             </tr>
 
             <tr>
@@ -264,8 +282,8 @@
               <td class="good">
                 <a href="#homebrew"><span aria-label="installed">✅</span></a>
               </td>
-              <td class="bad"><span aria-label="not installed">❌</span></td>
-              <td class="bad"><span aria-label="not installed">❌</span></td>
+              <td><span aria-label="not installed"></span></td>
+              <td><span aria-label="not installed"></span></td>
             </tr>
 
             <tr>
@@ -303,7 +321,7 @@
               <td class="good">
                 <a href="#debian"><span aria-label="installed">✅</span></a>
               </td>
-              <td class="bad"><span aria-label="not installed">❌</span></td>
+              <td><span aria-label="not installed"></span></td>
               <td class="good">
                 <a href="#debian"><span aria-label="installed">✅</span></a>
               </td>
@@ -345,8 +363,8 @@
               <td class="good">
                 <a href="#nix"><span aria-label="installed">✅</span></a>
               </td>
-              <td class="bad"><span aria-label="not installed">❌</span></td>
-              <td class="bad"><span aria-label="not installed">❌</span></td>
+              <td><span aria-label="not installed"></span></td>
+              <td><span aria-label="not installed"></span></td>
             </tr>
 
             <tr>
@@ -388,14 +406,14 @@
                 />
               </td>
 
-              <td class="bad"><span aria-label="not installed">❌</span></td>
-              <td class="bad"><span aria-label="not installed">❌</span></td>
+              <td><span aria-label="not installed"></span></td>
+              <td><span aria-label="not installed"></span></td>
               <td class="good">
                 <a href="#vscode-marketplace"
                   ><span aria-label="installed">✅</span></a
                 >
               </td>
-              <td class="bad"><span aria-label="not installed">❌</span></td>
+              <td><span aria-label="not installed"></span></td>
             </tr>
 
             <tr>
@@ -433,9 +451,9 @@
                 <a href="#manual"><span aria-label="installed">✅</span></a>
               </td>
               <td class="good">
-                <a href="#manual"><span aria-label="installed">✅</span></a>
+                <a href="#manual-vscode"><span aria-label="installed">✅</span></a>
               </td>
-              <td class="bad"><span aria-label="not installed">❌</span></td>
+              <td><span aria-label="not installed"></span></td>
             </tr>
 
             <tr>
@@ -466,9 +484,9 @@
                 />
               </td>
 
-              <td class="bad"><span aria-label="not installed">❌</span></td>
-              <td class="bad"><span aria-label="not installed">❌</span></td>
-              <td class="bad"><span aria-label="not installed">❌</span></td>
+              <td><span aria-label="not installed"></span></td>
+              <td><span aria-label="not installed"></span></td>
+              <td><span aria-label="not installed"></span></td>
               <td class="good">
                 <a href="#manual-vim"><span aria-label="installed">✅</span></a>
               </td>
@@ -724,8 +742,8 @@
           <img class="os-logo" src="macos.svg" alt="" />&nbsp;macOS with npm
         </h4>
         <blockquote>
-          <pre><code>$ <kbd>npm install quick-lint-js --save-dev --save-exact</kbd>
-$ <kbd>node_modules/.bin/quick-lint-js --help</kbd></code></pre>
+          <pre><code><kbd>npm install quick-lint-js --save-dev --save-exact</kbd>
+<kbd>node_modules/.bin/quick-lint-js --help</kbd></code></pre>
         </blockquote>
 
         <h4>
@@ -733,16 +751,16 @@ $ <kbd>node_modules/.bin/quick-lint-js --help</kbd></code></pre>
           <img class="os-logo" src="macos.svg" alt="" />&nbsp;macOS with yarn
         </h4>
         <blockquote>
-          <pre><code>$ <kbd>yarn add quick-lint-js --dev --exact</kbd>
-$ <kbd>node_modules/.bin/quick-lint-js --help</kbd></code></pre>
+          <pre><code><kbd>yarn add quick-lint-js --dev --exact</kbd>
+<kbd>node_modules/.bin/quick-lint-js --help</kbd></code></pre>
         </blockquote>
 
         <h4>
           <img class="os-logo" src="windows.svg" alt="" />&nbsp;Windows with npm
         </h4>
         <blockquote>
-          <pre><code>$ <kbd>npm install quick-lint-js --save-dev --save-exact</kbd>
-$ <kbd>node_modules\.bin\quick-lint-js.cmd --help</kbd></code></pre>
+          <pre><code><kbd>npm install quick-lint-js --save-dev --save-exact</kbd>
+<kbd>node_modules\.bin\quick-lint-js.cmd --help</kbd></code></pre>
         </blockquote>
 
         <h4>
@@ -750,8 +768,8 @@ $ <kbd>node_modules\.bin\quick-lint-js.cmd --help</kbd></code></pre>
           yarn
         </h4>
         <blockquote>
-          <pre><code>$ <kbd>yarn add quick-lint-js --dev --exact</kbd>
-$ <kbd>node_modules\.bin\quick-lint-js.cmd --help</kbd></code></pre>
+          <pre><code><kbd>yarn add quick-lint-js --dev --exact</kbd>
+<kbd>node_modules\.bin\quick-lint-js.cmd --help</kbd></code></pre>
         </blockquote>
 
         <h3>Install globally</h3>
@@ -764,14 +782,14 @@ $ <kbd>node_modules\.bin\quick-lint-js.cmd --help</kbd></code></pre>
           <img class="os-logo" src="macos.svg" alt="" />&nbsp;macOS
         </h4>
         <blockquote>
-          <pre><code>$ <kbd>sudo npm install --global --unsafe-perm quick-lint-js</kbd>
-$ <kbd>quick-lint-js --help</kbd></code></pre>
+          <pre><code><kbd>sudo npm install --global --unsafe-perm quick-lint-js</kbd>
+<kbd>quick-lint-js --help</kbd></code></pre>
         </blockquote>
 
         <h4><img class="os-logo" src="windows.svg" alt="" />&nbsp;Windows</h4>
         <blockquote>
-          <pre><code>$ <kbd>npm install --global quick-lint-js</kbd>
-$ <kbd>quick-lint-js.cmd --help</kbd></code></pre>
+          <pre><code><kbd>npm install --global quick-lint-js</kbd>
+<kbd>quick-lint-js.cmd --help</kbd></code></pre>
         </blockquote>
       </article>
 
@@ -799,7 +817,7 @@ $ <kbd>quick-lint-js.cmd --help</kbd></code></pre>
           quick-lint-js' tap to your Homebrew installation:
         </p>
         <blockquote>
-          <pre><code>$ <kbd>brew tap quick-lint/quick-lint-js https://github.com/quick-lint/quick-lint-js.git</kbd></code></pre>
+          <pre><code><kbd>brew tap quick-lint/quick-lint-js https://github.com/quick-lint/quick-lint-js.git</kbd></code></pre>
         </blockquote>
 
         <p>
@@ -807,7 +825,7 @@ $ <kbd>quick-lint-js.cmd --help</kbd></code></pre>
           quick-lint-js:
         </p>
         <blockquote>
-          <pre><code>$ <kbd>brew install --HEAD quick-lint-js</kbd></code></pre>
+          <pre><code><kbd>brew install --HEAD quick-lint-js</kbd></code></pre>
         </blockquote>
 
         <p>
@@ -815,7 +833,7 @@ $ <kbd>quick-lint-js.cmd --help</kbd></code></pre>
           user path:
         </p>
         <blockquote>
-          <pre><code>$ <kbd>quick-lint-js --help</kbd></code></pre>
+          <pre><code><kbd>quick-lint-js --help</kbd></code></pre>
         </blockquote>
       </article>
 
@@ -836,20 +854,20 @@ $ <kbd>quick-lint-js.cmd --help</kbd></code></pre>
 
         <p>Open a terminal, and run the following commands:</p>
         <blockquote>
-          <pre><code>$ <kbd>curl https://c.quick-lint-js.com/quick-lint-js-release.key | sudo apt-key add -</kbd>
-<div class="long-shell-command-line">$ <kbd>printf '\n# https://quick-lint-js.com/install.html#debian\ndeb https://c.quick-lint-js.com/debian experimental main\n' | sudo tee -a /etc/apt/sources.list.d/quick-lint-js.list</kbd></div>
-$ <kbd>sudo apt-get update</kbd>
+          <pre><code><kbd>curl https://c.quick-lint-js.com/quick-lint-js-release.key | sudo apt-key add -</kbd>
+<div class="long-shell-command-line"><kbd>printf '\n# https://quick-lint-js.com/install.html#debian\ndeb https://c.quick-lint-js.com/debian experimental main\n' | sudo tee -a /etc/apt/sources.list.d/quick-lint-js.list</kbd></div>
+<kbd>sudo apt-get update</kbd>
 
 # <img class="install-logo" src="gnome-terminal.svg" alt="" /> CLI and LSP server
-$ <kbd>sudo apt-get install quick-lint-js</kbd>
+<kbd>sudo apt-get install quick-lint-js</kbd>
 
 # <img class="install-logo" src="vim.gif" alt="" /> Vim plugin
-$ <kbd>sudo apt-get install quick-lint-js-vim</kbd></code></pre>
+<kbd>sudo apt-get install quick-lint-js-vim</kbd></code></pre>
         </blockquote>
 
         <p>Verify that quick-lint-js is installed:</p>
         <blockquote>
-          <pre><code>$ <kbd>quick-lint-js --version</kbd>
+          <pre><code><kbd>quick-lint-js --version</kbd>
 quick-lint-js version 0.2.0</code></pre>
         </blockquote>
       </article>
@@ -877,7 +895,7 @@ quick-lint-js version 0.2.0</code></pre>
         <blockquote>
           <pre
             class="long-shell-command-line"
-          ><code>$ <kbd>nix-env -f https://github.com/quick-lint/quick-lint-js/archive/0.2.0.tar.gz -iA quick-lint-js</kbd></code></pre>
+          ><code><kbd>nix-env -f https://github.com/quick-lint/quick-lint-js/archive/0.2.0.tar.gz -iA quick-lint-js</kbd></code></pre>
         </blockquote>
 
         <p>
@@ -885,7 +903,7 @@ quick-lint-js version 0.2.0</code></pre>
           user profile:
         </p>
         <blockquote>
-          <pre><code>$ <kbd>quick-lint-js --version</kbd>
+          <pre><code><kbd>quick-lint-js --version</kbd>
 quick-lint-js version 0.2.0</code></pre>
         </blockquote>
       </article>
