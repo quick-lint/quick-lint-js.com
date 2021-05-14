@@ -3,8 +3,14 @@
 <!-- See end of file for extended copyright information. -->
 <html>
   <head>
+    
+
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+
+
+
     <title>quick-lint-js: try in your browser</title>
-    <meta charset="utf-8" />
     <link href="../main.css" rel="stylesheet" />
     <style>
       /* Make #code-input and #shadow-code-input have the same size. */
@@ -148,9 +154,8 @@ console.log(`Welcome, ${ocupation}!`);
         import { loadQuickLintJS } from "./quick-lint-js.mjs";
 
         let codeInputElement = document.getElementById("code-input");
-        let shadowCodeInputElement = document.getElementById(
-          "shadow-code-input"
-        );
+        let shadowCodeInputElement =
+          document.getElementById("shadow-code-input");
 
         codeInputElement.addEventListener("scroll", (event) => {
           synchronizeScrolling();
