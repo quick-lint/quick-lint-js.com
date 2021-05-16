@@ -39,10 +39,16 @@
 
       .unicode-bom:before {
         content: "BOM";
+        background-color: #edbf66;
         border: 1px solid red;
-        background-color: #884444;
         border-radius: 5px;
         padding: 1px 3px;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .unicode-bom:before {
+          background-color: #884444;
+        }
       }
     </style>
   </head>
@@ -51,21 +57,37 @@
     <header>
       <h1><a href="../">quick-lint-js</a></h1>
       <p class="tag-line">quick-lint-js finds bugs in JavaScript programs.</p>
-      <nav>
-        <ul>
-          <li class="side-bar-only"><a href="..">Home</a></li>
-          <li><a href="../install/">Install</a></li>
-          <li><a href="../demo/">Try online</a></li>
-          <li class="current-page">Error docs</li>
-          <li><a href="../cli/">CLI docs</a></li>
-          <li><a href="../benchmarks/">Benchmarks</a></li>
-          <li>
-            <a href="https://github.com/quick-lint/quick-lint-js"
-              >Code on GitHub</a
-            >
-          </li>
-        </ul>
-      </nav>
+      
+
+<script>
+  //
+</script>
+
+<nav>
+  <ul>
+    
+    <li class="side-bar-only">
+      <a href="../">Home</a>
+    </li>
+      
+    <li><a href="../install/">Install</a></li>
+      
+    <li><a href="../demo/">Try online</a></li>
+      
+    <li class="current-page">Error docs</li>
+      
+    <li><a href="../cli/">CLI docs</a></li>
+      
+    <li><a href="../benchmarks/">Benchmarks</a></li>
+     
+    <li>
+      <a href="https://github.com/quick-lint/quick-lint-js">Code on GitHub</a>
+    </li>
+  </ul>
+</nav>
+
+
+
     </header>
 
     <main>

@@ -134,21 +134,37 @@
     <header>
       <h1><a href="..">quick-lint-js</a></h1>
       <p class="tag-line">quick-lint-js finds bugs in JavaScript programs.</p>
-      <nav>
-        <ul>
-          <li class="side-bar-only"><a href="..">Home</a></li>
-          <li class="current-page">Install</li>
-          <li><a href="../demo/">Try online</a></li>
-          <li><a href="../errors/">Error docs</a></li>
-          <li><a href="../cli/">CLI docs</a></li>
-          <li><a href="../benchmarks/">Benchmarks</a></li>
-          <li>
-            <a href="https://github.com/quick-lint/quick-lint-js"
-              >Code on GitHub</a
-            >
-          </li>
-        </ul>
-      </nav>
+      
+
+<script>
+  //
+</script>
+
+<nav>
+  <ul>
+    
+    <li class="side-bar-only">
+      <a href="../">Home</a>
+    </li>
+      
+    <li class="current-page">Install</li>
+      
+    <li><a href="../demo/">Try online</a></li>
+      
+    <li><a href="../errors/">Error docs</a></li>
+      
+    <li><a href="../cli/">CLI docs</a></li>
+      
+    <li><a href="../benchmarks/">Benchmarks</a></li>
+     
+    <li>
+      <a href="https://github.com/quick-lint/quick-lint-js">Code on GitHub</a>
+    </li>
+  </ul>
+</nav>
+
+
+
     </header>
 
     <main>
@@ -266,7 +282,7 @@
                       aria-label="not installed globally"
                       title="not installed globally"
                       class="footnote-marker"
-                      >&nbsp;**</span
+                      >&nbsp;†</span
                     ></span
                   ></a
                 >
@@ -439,6 +455,53 @@
             </tr>
 
             <tr>
+              <th>
+                <a href="#open-vsx">
+                  <img
+                    class="install-logo"
+                    src="../open-vsx.svg"
+                    alt=""
+                    aria-labeled-by="install-method-open-vsx"
+                  />&nbsp;<span id="install-method-open-vsx"
+                    >Open&nbsp;VSX</span
+                  ></a
+                >
+              </th>
+
+              <td class="os">
+                <img
+                  class="os-logo"
+                  src="../linux.svg"
+                  alt="GNU/Linux"
+                  title="GNU/Linux"
+                />
+              </td>
+              <td class="os">
+                <img
+                  class="os-logo"
+                  src="../macos.svg"
+                  alt="macOS"
+                  title="macOS"
+                />
+              </td>
+              <td class="os">
+                <img
+                  class="os-logo"
+                  src="../windows.svg"
+                  alt="Windows"
+                  title="Windows"
+                />
+              </td>
+
+              <td><span aria-label="not installed"></span></td>
+              <td><span aria-label="not installed"></span></td>
+              <td class="good">
+                <a href="#open-vsx"><span aria-label="installed">✅</span></a>
+              </td>
+              <td><span aria-label="not installed"></span></td>
+            </tr>
+
+            <tr>
               <th><a href="#manual">Manual (pre-built)</a></th>
 
               <td class="os">
@@ -567,7 +630,7 @@
             such as documentation or shell completion plugins.
           </p>
           <p>
-            <span>**</span> The LSP server is not installed globally with this
+            <span>†</span> The LSP server is not installed globally with this
             installation method, so some editors might not be able to access it.
           </p>
         </figcaption>
@@ -1014,12 +1077,65 @@ quick-lint-js version 0.2.0</code></pre>
             href="https://marketplace.visualstudio.com/items?itemName=quick-lint.quick-lint-js"
             >quick-lint-js extension</a
           >
-          page, then click the <em>Install</em> button.
+          page, then click the <em>Install</em> button. If the
+          <em>Install</em> button is missing, copy the
+          <em>Installation</em> command, open Visual Studio Code, press
+          <kbd>CTRL-P</kbd> (Linux or Windows) or <kbd>CMD-P</kbd> (macOS), then
+          paste the copied command.
         </p>
         <p>
           Alternatively, open Visual Studio Code, open the Extensions panel, and
           search for <kbd>quick-lint-js</kbd>.
         </p>
+      </article>
+
+      <article id="open-vsx">
+        <h2>
+          <img class="install-logo" src="../open-vsx.svg" alt="" />&nbsp;Open
+          VSX
+        </h2>
+        <p>
+          Supported operating systems:
+          <img
+            class="os-logo"
+            src="../linux.svg"
+            alt="GNU/Linux"
+            title="GNU/Linux"
+          />
+          <img class="os-logo" src="../macos.svg" alt="macOS" title="macOS" />
+          <img
+            class="os-logo"
+            src="../windows.svg"
+            alt="Windows"
+            title="Windows"
+          />
+        </p>
+
+        <p>quick-lint-js has a VSCodium extension on the Open VSX registry.</p>
+        <p>
+          Open VSCodium, open the Extensions panel, and search for
+          <kbd>quick-lint-js</kbd>.
+        </p>
+        <p>Alternatively, install the extension manually:</p>
+        <ol>
+          <li>
+            Visit the
+            <a href="https://open-vsx.org/extension/quick-lint/quick-lint-js"
+              >quick-lint-js extension</a
+            >
+            page.
+          </li>
+
+          <li>Click the <em>Download</em> button.</li>
+          <li>Open VSCodium.</li>
+          <li>Open the Extensions panel.</li>
+          <li>Click the "..." to open a menu.</li>
+          <li>Select <em>Install from VSIX...</em>.</li>
+          <li>
+            Choose the <code>quick-lint.quick-lint-js-0.2.0.vsix</code> file you
+            downloaded.
+          </li>
+        </ol>
       </article>
 
       <article id="manual">
