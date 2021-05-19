@@ -241,12 +241,16 @@
           <th colspan="4">response time (milliseconds)</th>
         </tr>
         <tr>
-          <th class="numbers"><abbr title="minimum">min</abbr></th>
+          <th class="numbers unimportant"><abbr title="minimum">min</abbr></th>
           <th class="numbers"><abbr title="average">avg</abbr></th>
-          <th class="numbers"><abbr title="maximum">max</abbr></th>
+          <th class="numbers unimportant"><abbr title="maximum">max</abbr></th>
           <th class="numbers">
             <abbr title="slowdown compared to">÷</abbr>
-            <span style="--hue: 0;" class="linter-name">quick-lint-js</span>
+
+            <span style="--hue: 0;" class="linter-name"
+              ><abbr title="quick-lint-js" style="display: none;">qljs</abbr
+              ><span class="unabbreviated">quick-lint-js</span></span
+            >
           </th>
         </tr>
       </thead>
@@ -257,9 +261,9 @@
               data-series="quick-lint-js"
             >
               <th>quick-lint-js</th>
+              <td class="unimportant">0.41</td>
               <td>0.41</td>
-              <td>0.41</td>
-              <td>0.42</td>
+              <td class="unimportant">0.42</td>
               <td>1.0×</td>
             </tr>
           
@@ -268,9 +272,9 @@
               data-series="RSLint"
             >
               <th>RSLint</th>
-              <td>18.50</td>
+              <td class="unimportant">18.50</td>
               <td>18.52</td>
-              <td>18.55</td>
+              <td class="unimportant">18.55</td>
               <td>44.8×</td>
             </tr>
           
@@ -279,9 +283,9 @@
               data-series="Flow"
             >
               <th>Flow</th>
-              <td>36.73</td>
+              <td class="unimportant">36.73</td>
               <td>37.00</td>
-              <td>37.52</td>
+              <td class="unimportant">37.52</td>
               <td>89.4×</td>
             </tr>
           
@@ -290,9 +294,9 @@
               data-series="eslint-server"
             >
               <th>eslint-server</th>
-              <td>70.24</td>
+              <td class="unimportant">70.24</td>
               <td>83.23</td>
-              <td>114.32</td>
+              <td class="unimportant">114.32</td>
               <td>201.2×</td>
             </tr>
           
@@ -301,9 +305,9 @@
               data-series="Deno"
             >
               <th>Deno</th>
-              <td>387.57</td>
+              <td class="unimportant">387.57</td>
               <td>440.96</td>
-              <td>559.74</td>
+              <td class="unimportant">559.74</td>
               <td>1065.9×</td>
             </tr>
           
@@ -312,9 +316,9 @@
               data-series="TypeScript-Theia"
             >
               <th>TypeScript-Theia</th>
-              <td>435.07</td>
+              <td class="unimportant">435.07</td>
               <td>621.95</td>
-              <td>984.36</td>
+              <td class="unimportant">984.36</td>
               <td>1503.4×</td>
             </tr>
           
@@ -356,8 +360,8 @@
           </li>
           <li>
             <strong class="linter-name" style="--hue: 120">RSLint</strong>
-            version b7a4eeb69dc00fedfee81eaed3cf2ad36bcb2e2e (unreleased) (with
-            rustc version 1.51.0)
+            version b7a4eeb69dc00fedfee8&shy;1eaed3cf2ad36bcb2e2e (unreleased)
+            (with rustc version 1.51.0)
           </li>
           <li>
             <strong class="linter-name" style="--hue: 180">Flow</strong> version
