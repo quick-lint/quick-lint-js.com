@@ -42,6 +42,8 @@
       
     <li class="current-page">CLI docs</li>
       
+    <li><a href="../config/">Config docs</a></li>
+      
     <li><a href="../benchmarks/">Benchmarks</a></li>
      
     <li>
@@ -63,10 +65,10 @@
 <li><a href="#_synopsis">Synopsis</a></li>
 <li><a href="#_description">Description</a></li>
 <li><a href="#_options">Options</a></li>
-<li><a href="#_error_lists">Error lists</a></li>
+<li><a href="#error-lists">Error lists</a></li>
 <li><a href="#_exit_status">Exit status</a></li>
 <li><a href="#_environment">Environment</a></li>
-<li><a href="#_example">Example</a></li>
+<li><a href="#examples">Example</a></li>
 </ul>
 </div>
 <div class="sect1">
@@ -137,11 +139,30 @@ Use this mode to integrate with code editors supporting LSP.</p>
 <strong>--vim-file-bufnr</strong> applies only to files which are given later in the command line.
 Therefore, if multiple files are given, <strong>--vim-file-bufnr</strong> can be specified multiple times.</p>
 </dd>
+</dl>
+</div>
+<div id="config-file" class="dlist">
+<dl>
+<dt class="hdlist1"><strong>--config-file</strong>=<em>file</em></dt>
+<dd>
+<p>Read configuration options from <em>file</em> and apply them to input files which are given later in the command line.
+See the <a href="../config/">config docs</a> for the format of configuration files.</p>
+<div class="paragraph">
+<p>If <strong>--config-file</strong> is given twice, then the <em>file</em> for the first <strong>--config-file</strong> option applies only to the input files between the two <strong>--config-file</strong> options, and the <em>file</em> for the second <strong>--config-file</strong> option apples only to the input files after the second <strong>--config-file</strong> option.
+See the <a href="#examples">Example</a> section for an example.</p>
+</div>
+<div class="paragraph">
+<p>If <strong>--config-file</strong> is not given, an empty configuration file is assumed.</p>
+</div>
+<div class="paragraph">
+<p>Incompatible with <strong>--lsp-server</strong>.</p>
+</div>
+</dd>
 <dt class="hdlist1"><strong>--exit-fail-on</strong>=<em>errors</em></dt>
 <dd>
 <p>Cause <strong>quick-lint-js</strong> to exit with a non-zero exit code if any of the discovered errors is listed in <em>errors</em>.</p>
 <div class="paragraph">
-<p>See the "ERROR LISTS" section for a description of the format for <em>errors</em>.</p>
+<p>See the <a href="#error-lists">Error lists</a> section for a description of the format for <em>errors</em>.</p>
 </div>
 <div class="paragraph">
 <p>Incompatible with <strong>--lsp-server</strong>.</p>
@@ -164,6 +185,11 @@ An editor can send LSP requests and notifications to <strong>quick-lint-js</stro
 <p>Incompatible with <strong>--output-format</strong>.</p>
 </div>
 </dd>
+<dt class="hdlist1"><strong>--dump-config</strong></dt>
+<dd>
+<p>Print quick-lint-js' configuration and exit.
+<strong>This option is not yet implemented.</strong></p>
+</dd>
 <dt class="hdlist1"><strong>-h</strong></dt>
 <dt class="hdlist1"><strong>--help</strong></dt>
 <dd>
@@ -185,7 +211,7 @@ An editor can send LSP requests and notifications to <strong>quick-lint-js</stro
 </div>
 </div>
 <div class="sect1">
-<h2 id="_error_lists">Error lists</h2>
+<h2 id="error-lists">Error lists</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Some options, such as <strong>--exit-fail-on</strong>, accept an error list.
@@ -294,7 +320,7 @@ For example, set <strong>LC_ALL=en</strong> to see messages written in United St
 </div>
 </div>
 <div class="sect1">
-<h2 id="_example">Example</h2>
+<h2 id="examples">Example</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>To lint a file called <em>lib/index.js</em>, writing error messages to the terminal:</p>
@@ -343,6 +369,20 @@ lib/index.js:5:25: warning: use of undeclared variable: ocupation [E057]</pre>
 bad.js:5:25: warning: use of undeclared variable: $ [E057]
 $ echo $?
 0</pre>
+</div>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>To lint source files with a strict configuration file and lint test files with a lax configuration file:</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="listingblock">
+<div class="content">
+<pre>$ <strong>quick-lint-js</strong> \
+    --config-file strict-quick-lint-js.config src/index.js src/helpers.js \
+    --config-file lax-quick-lint-js.config test/test-app.js</pre>
 </div>
 </div>
 </blockquote>

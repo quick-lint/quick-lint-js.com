@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<!-- Copyright (C) 2020  Matthew Glazar -->
+<!-- See end of file for extended copyright information. -->
+<html>
+  <head>
+    
+
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+
+
+
+    <script>
+      //
+    </script>
+    <title>quick-lint-js: config file documentation</title>
+    <link href="../main.css" rel="stylesheet" />
+  </head>
+
+  <body class="side-bar-nav">
+    <header>
+      <h1><a href="../">quick-lint-js</a></h1>
+      <p class="tag-line">quick-lint-js finds bugs in JavaScript programs.</p>
+      
+
+<script>
+  //
+</script>
+
+<nav>
+  <ul>
+    
+    <li class="side-bar-only">
+      <a href="../">Home</a>
+    </li>
+      
+    <li><a href="../install/">Install</a></li>
+      
+    <li><a href="../demo/">Try online</a></li>
+      
+    <li><a href="../errors/">Error docs</a></li>
+      
+    <li><a href="../cli/">CLI docs</a></li>
+      
+    <li class="current-page">Config docs</li>
+      
+    <li><a href="../benchmarks/">Benchmarks</a></li>
+     
+    <li>
+      <a href="https://github.com/quick-lint/quick-lint-js">Code on GitHub</a>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </header>
+
+    <main>
+      <p>This page documents how to configure quick-lint-js.</p>
+      <div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_description">Description</a></li>
+<li><a href="#_files">Files</a></li>
+<li><a href="#_format">Format</a></li>
+<li><a href="#_options">Options</a></li>
+<li><a href="#globals">Globals</a></li>
+<li><a href="#global-groups">Global Groups</a></li>
+<li><a href="#_examples">Examples</a></li>
+</ul>
+</div>
+<div class="sect1">
+<h2 id="_description">Description</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The
+<a href="../cli/">quick-lint-js CLI</a>
+and also quick-lint-js editor plugins, can be configured using a <code>quick-lint-js.config</code> file.</p>
+</div>
+<div class="paragraph">
+<p><strong>These configuration options are not yet implemented.</strong></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_files">Files</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>quick-lint-js uses the following algorithm to find its configuration:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Remember the directory containing the input JavaScript file as the <em>current directory</em>.
+If the input JavaScript file has no path, remember the current working directory as the <em>current directory</em>.</p>
+</li>
+<li>
+<p>Look for a configuration file in the <em>current directory</em>:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Check if the file <code>quick-lint-js.config</code> exists.
+If so, use it as the configuration file and stop.</p>
+</li>
+<li>
+<p>Check if the file <code>.quick-lint-js.config</code> exists.
+If so, use it as the configuration file and stop.</p>
+</li>
+<li>
+<p>Check if the file <code>package.json</code> exists.
+If so, use it as the configuration file and stop.</p>
+</li>
+<li>
+<p>Go to step 3.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>If the <em>current directory</em> is a filesystem root, assume no configuration file and stop.</p>
+</li>
+<li>
+<p>Remember the parent of the <em>current directory</em> as the <em>current directory</em>.
+The parent of a directory is determined by suffixing a <code>..</code> component to the directory&#8217;s path.
+(This method of determining the parent affects how symbolic links in paths are handled.)</p>
+</li>
+<li>
+<p>Go to step 2.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>In short, quick-lint-js looks for <code>quick-lint-js.config</code>, <code>.quick-lint-js.config</code>, or <code>package.json</code> in ancestor directories.
+If multiple files are found, <code>quick-lint-js.config</code> is used if present, otherwise <code>.quick-lint-js.config</code> is used if present.</p>
+</div>
+<div class="paragraph">
+<p>If no configuration file is found, quick-lint-js behaves as if a <code>quick-lint-js.config</code> file was found with contents <code>{}</code>.</p>
+</div>
+<div class="paragraph">
+<p>In addition to the above search algorithm, the
+<a href="../cli/#config-file"><strong>--config-file</strong> command-line option</a>
+can be given to
+quick-lint-js' CLI.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_format">Format</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>quick-lint-js.config</code> and <code>.quick-lint-js.config</code> files contain UTF-8-encoded JSON (per RFC 8259).
+The top-level object contains quick-lint-js configuration properties.
+A <code>quick-lint-js.config</code> or <code>.quick-lint-js.config</code> file with no configuration looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>quick-lint-js.config</code> and <code>.quick-lint-js.config</code> do not support a dedicated comment syntax.
+To write a comment, you can create an object key starting a space character.
+quick-lint-js will ignore an object property if its key starts with a space.
+For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  " ": "this file configures quick-lint-js",
+  "globals": {
+    " exported by Prototype.js": null,
+    "$": true,
+    "Ajax": true,
+    "Class": true,
+    "Element": true,
+
+    " exported by Google Charts": null,
+    "chart": true
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>package.json</code> files contain UTF-8-encoded JSON.
+The <strong>quick-lint-js.config</strong> property of the top-level object contains quick-lint-js configuration properties.
+If the <strong>quick-lint-js.config</strong> property is missing, it is assumed to be an empty object ({}).
+A <code>package.json</code> file might look like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "name": "my-npm-package",
+  "version": "0.1.0",
+  "quick-lint-js.config": {
+    "globals": {
+      "YUI": {"writable": false}
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_options">Options</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The quick-lint-js configuration object can contain one or more of the following keys:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><strong>globals</strong></dt>
+<dd>
+<p>Optional.
+Global variables which programs can use.
+<strong>This configuration property is not yet implemented.</strong></p>
+<div class="paragraph">
+<p><strong>globals</strong> is an object
+Its format is described in the <a href="#globals">Globals</a> section below.</p>
+</div>
+</dd>
+<dt class="hdlist1"><strong>global-groups</strong></dt>
+<dd>
+<p>Optional.
+Pre-defined categories of global variables which programs can use.
+<strong>This configuration property is not yet implemented.</strong></p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>global-groups</strong> is either an array or a boolean.</p>
+</div>
+<div class="paragraph">
+<p>If <strong>global-groups</strong> is <strong>true</strong> or not present, then it&#8217;s as if the value was an array of all possible group names, except for <strong>literally-anything</strong>.</p>
+</div>
+<div class="paragraph">
+<p>If <strong>global-groups</strong> is <strong>false</strong> or an empty array, then no global variables are defined aside from those listed in the <strong>globals</strong> configuration property.</p>
+</div>
+<div class="paragraph">
+<p>If <strong>global-groups</strong> is a non-empty array, then global variables are defined per the given group names.
+Each group name is a string.
+For the list of group names, see the <a href="#Global groups">[Global groups]</a> section.</p>
+</div>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="globals">Globals</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <strong>globals</strong> configuration property tells quick-lint-js what global variables to assume exist.</p>
+</div>
+<div class="paragraph">
+<p>If the global variables you want are from a popular platform or library, you might want to use <strong>global-groups</strong> instead.</p>
+</div>
+<div class="paragraph">
+<p>Each property in the <strong>globals</strong> configuration property represents a single global variable.
+The property&#8217;s key is the JavaScript variable name.
+The property&#8217;s value can be either <strong>true</strong>, <strong>false</strong>, or an object:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If the value is <strong>true</strong>, then the variable is defined as if the property&#8217;s value was <strong>{}</strong>.</p>
+</li>
+<li>
+<p>If the value is <strong>false</strong>, then the variable is not defined, even if a group listed in <strong>global-groups</strong> would otherwise define the variable.</p>
+</li>
+<li>
+<p>If the value is an object, then the variable is defined with attributes according to the object:</p>
+<div class="openblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>shadowable</strong>: Optional.
+If <strong>true</strong> or not present, the variable can redefined in the program&#8217;s outer-most scope.
+If <strong>false</strong>, the variable cannot be redefined in the program&#8217;s outer-most scope.</p>
+</li>
+<li>
+<p><strong>writable</strong>: Optional.
+If <strong>true</strong> or not present, the variable can be assigned to.
+If <strong>false</strong>, the variable cannot be assigned to.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>JSON Unicode escapes (<strong>"\u0068ello"</strong>) are allowed in the variable name.
+JavaScript Unicode escapes (<strong>"\\u{68}llo"</strong>) are not allowed in the variable name.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="global-groups">Global Groups</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following groups are supported for the <strong>global-groups</strong> configuration property:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><strong>literally-anything</strong></dt>
+<dd>
+<p>all possible global variables.
+All global variables are defined as shadowable and writable.
+This in effect suppresses E002, E033, E057, or E059 entirely (except if variables are also configured using the <strong>globals</strong> configuration property).
+This group is not enabled by default.</p>
+</dd>
+<dt class="hdlist1"><strong>browser</strong></dt>
+<dd>
+<p>globals defined in HTML and DOM standards, including <strong>window</strong>, <strong>alert</strong>, and <strong>console</strong>.
+This group is enabled by default.</p>
+</dd>
+<dt class="hdlist1"><strong>ecmascript</strong></dt>
+<dd>
+<p>globals defined by the latest ECMAScript (JavaScript) standard, including <strong>Object</strong> and <strong>NaN</strong>.
+This group is enabled by default.</p>
+</dd>
+<dt class="hdlist1"><strong>jasmine</strong></dt>
+<dd>
+<p>globals defined by the Jasmine test framework, including <strong>describe</strong>, <strong>it</strong>, and <strong>expect</strong>.
+This group is enabled by default.</p>
+</dd>
+<dt class="hdlist1"><strong>jest</strong></dt>
+<dd>
+<p>globals defined by the Jest test framework, including <strong>describe</strong>, <strong>test</strong>, and <strong>expect</strong>.
+This group is enabled by default.</p>
+</dd>
+<dt class="hdlist1"><strong>jquery</strong></dt>
+<dd>
+<p>globals defined by the jQuery library, including <strong>$</strong>.
+This group is enabled by default.</p>
+</dd>
+<dt class="hdlist1"><strong>node.js</strong></dt>
+<dd>
+<p>globals defined by Node.js for CommonJS modules, including <strong>require</strong>, <strong>console</strong>, and <strong>__dirname</strong>.
+This group is enabled by default.</p>
+</dd>
+<dt class="hdlist1"><strong>node.js-es</strong></dt>
+<dd>
+<p>globals defined by Node.js for ES modules, including <strong>console</strong> and <strong>process</strong>.
+This group is enabled by default.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_examples">Examples</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Imagine we have a browser-only application.
+Its tests are written using the Jest testing framework.
+It uses the Google Maps libraries, which are exposed using the <strong>google</strong> global variable.
+Such an application might have the following <code>quick-lint-js.config</code> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "global-groups": ["browser", "ecmascript", "jest"],
+  "globals": {
+    "google": {"writable": false}
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, the application might prefer to have fewer files in the project.
+In this case, the application configures quick-lint-js in its <code>package.json</code> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "name": "acme",
+  "version": "1.2.1",
+  "devDependencies": {
+    "jest": "3.0.1"
+  },
+  "quick-lint-js.config": {
+    "global-groups": ["browser", "ecmascript", "jest"],
+    "globals": {
+      "google": {"writable": false}
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<hr>
+<div class="paragraph">
+<p>If you want to suppress E002, E033, E057, or E059, configure <strong>globals</strong> or <strong>global-groups</strong>.
+For example, if you&#8217;re seeing a spurious warning E057 "use of undeclared variable: MyLibrary" (false positive), use the following configuration in <code>quick-lint-js.config</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "globals": {
+    "MyLibrary": true
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you are not seeing E002, E033, E057, or E059 (false negative), but you want to see E057 "use of undeclared variable: $", use one of the following configuration in <code>quick-lint-js.config</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "globals": {
+    "$": false
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, suppress the <strong>jquery</strong> globals group (which defines <strong>$</strong> as a global variable) by enabling only the environments you use in your project with this <code>quick-lint-js.config</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "global-groups": ["ecmascript", "node.js"]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+    </main>
+
+    <footer>
+      <nav>
+        <ul>
+          <li><a href="..">quick-lint-js home page</a></li>
+          <li><a href="../hiring/">we're hiring! get paid to code</a></li>
+          <li><a href="../benchmarks/">benchmarks vs other linters</a></li>
+          <li><a href="../demo/">try quick-lint-js in your browser</a></li>
+          <li>
+            <a href="https://github.com/quick-lint/quick-lint-js"
+              >source code on GitHub</a
+            >
+          </li>
+          <li><a href="../license/">copyright and license information</a></li>
+        </ul>
+      </nav>
+    </footer>
+  </body>
+</html>
+
+<!--
+quick-lint-js finds bugs in JavaScript programs.
+Copyright (C) 2020  Matthew Glazar
+
+This file is part of quick-lint-js.
+
+quick-lint-js is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+quick-lint-js is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with quick-lint-js.  If not, see <https://www.gnu.org/licenses/>.
+-->

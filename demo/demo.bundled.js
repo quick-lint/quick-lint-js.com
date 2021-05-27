@@ -457,7 +457,9 @@
     synchronizeScrolling();
   });
   synchronizeContent();
-  new ResizeObserver(synchronizeSize).observe(codeInputElement);
+  if (typeof window.ResizeObserver !== "undefined") {
+    new window.ResizeObserver(synchronizeSize).observe(codeInputElement);
+  }
   (0, import_quick_lint_js.createProcessFactoryAsync)().then(async (processFactory) => {
     let process2 = await processFactory.createProcessAsync();
     let parser = await process2.createParserForWebDemoAsync();
