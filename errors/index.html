@@ -81,10 +81,11 @@
     <li><a href="../config/">Config docs</a></li>
       
     <li><a href="../benchmarks/">Benchmarks</a></li>
+      
+    <li><a href="https://github.com/quick-lint/quick-lint-js">Code on GitHub</a></li>
+      
+    <li><a href="../contact/">Contact</a></li>
      
-    <li>
-      <a href="https://github.com/quick-lint/quick-lint-js">Code on GitHub</a>
-    </li>
   </ul>
 </nav>
 
@@ -166,6 +167,12 @@
         </li>
         
         <li>
+          <a href="#E063"
+            >E063: missing operator between expression and arrow function</a
+          >
+        </li>
+        
+        <li>
           <a href="#E077"
             >E077: function call before declaration in blocked scope</a
           >
@@ -180,6 +187,12 @@
         <li>
           <a href="#E095"
             >E095: Unicode byte order mark (BOM) cannot appear before #! at beginning of script</a
+          >
+        </li>
+        
+        <li>
+          <a href="#E160"
+            >E160: unexpected &#39;=&gt;&#39;; expected parameter for arrow function, but got an expression instead</a
           >
         </li>
         
@@ -341,7 +354,21 @@ any of the following:</p>
 <li>ZWJ (U+200D)</li>
 <li>ZWNJ (U+200C)</li>
 </ul>
-</article>  <article id='E077'><h2><a class='self-reference' href='#E077'>E077: function call before declaration in blocked scope</a></h2><p>A function can't be called before its declaration in block scope <em>in Safari</em>.</p>
+</article>  <article id='E063'><h2><a class='self-reference' href='#E063'>E063: missing operator between expression and arrow function</a></h2><p>The left-hand side of <code>=&gt;</code> must be a list of parameters. It is a syntax error if
+the left-hand side looks like a function call:</p>
+<figure><pre><code>let fs = require("fs");
+let path = process.argv[2];
+fs.readFile(<mark>path (</mark>err, data) =&gt; {
+  console.log(data);
+});
+</code></pre></figure><p>To fix this error, make the left-hand side of <code>=&gt;</code> valid by adding an operator
+(usually <code>,</code>) before the parameter list:</p>
+<figure><pre><code>let fs = require("fs");
+let path = process.argv[2];
+fs.readFile(path, (err, data) =&gt; {
+  console.log(data);
+});
+</code></pre></figure></article>  <article id='E077'><h2><a class='self-reference' href='#E077'>E077: function call before declaration in blocked scope</a></h2><p>A function can't be called before its declaration in block scope <em>in Safari</em>.</p>
 <figure><pre><code><mark>f</mark>();
 {
     function f() {}
@@ -376,6 +403,25 @@ console.log(x);
 <figure><pre><code>#!/usr/bin/env node
 let x = 3;
 console.log(x);
+</code></pre></figure></article>  <article id='E160'><h2><a class='self-reference' href='#E160'>E160: unexpected '=&gt;'; expected parameter for arrow function, but got an expression instead</a></h2><p>The left-hand side of <code>=&gt;</code> must be a list of parameters. It is a syntax error if
+the left-hand side is instead an expression (such as a property access or a
+function call):</p>
+<figure><pre><code>if (this.mapSize <mark>=&gt;</mark> this.capacity) {
+  throw new Error("too many items");
+}
+
+let fs = require("fs");
+let path = process.argv[2];
+fs.mkdir(path () <mark>=&gt;</mark> console.log("done"));
+</code></pre></figure><p>To fix this error, replace <code>=&gt;</code> with the intended operator, such as <code>&gt;=</code>:</p>
+<figure><pre><code>if (this.mapSize &gt;= this.capacity) {
+  throw new Error("too many items");
+}
+</code></pre></figure><p>Alternatively, make the left-hand side of <code>=&gt;</code> valid by adding an operator
+(usually <code>,</code>) before the parameter list:</p>
+<figure><pre><code>let fs = require("fs");
+let path = process.argv[2];
+fs.mkdir(path, () =&gt; console.log("done"));
 </code></pre></figure></article>  <article id='E202'><h2><a class='self-reference' href='#E202'>E202: missing '=' after variable</a></h2><p>The following code has a missing equal '=' after variable name.</p>
 <figure><pre><code>let x<mark></mark> new Array();
 </code></pre></figure><p>To fix this error, add '=' after variable <code>x</code>.</p>
