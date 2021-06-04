@@ -104,7 +104,7 @@
 <dd>
 <p>Batch mode (default).
 Check the given files, and report errors to the terminal (standard error).
---output-format can be used to customize how errors look.</p>
+<strong>--output-format</strong> can be used to customize how errors look.</p>
 </dd>
 <dt class="hdlist1"><strong>quick-lint-js</strong> --lsp-server</dt>
 <dd>
@@ -124,21 +124,31 @@ Use this mode to integrate with code editors supporting LSP.</p>
 <dt class="hdlist1"><strong>--output-format</strong>=<em>format</em></dt>
 <dd>
 <p>Customize how errors are printed. <em>format</em> is one of the following:</p>
-<div class="paragraph">
-<p>- <strong>gnu-like</strong> (default): a human-readable format similar to GCC.</p>
-</div>
-<div class="paragraph">
-<p>- <strong>vim-qflist-json</strong>: machine-readable JSON which can be given to Vim&#8217;s <em>setqflist</em> function.</p>
+<div class="openblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>gnu-like</strong> (default): a human-readable format similar to GCC.</p>
+</li>
+<li>
+<p><strong>vim-qflist-json</strong>: machine-readable JSON which can be given to Vim&#8217;s <em>setqflist</em> function.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>Incompatible with <strong>--lsp-server</strong>.</p>
 </div>
+</div>
+</div>
 </dd>
 <dt class="hdlist1"><strong>--vim-file-bufnr</strong>=<em>number</em></dt>
 <dd>
-<p>Set the <em>bufnr</em> property for errors printed with the <strong>--output-format=vim-qflist-json</strong> option.
-<strong>--vim-file-bufnr</strong> applies only to files which are given later in the command line.
-Therefore, if multiple files are given, <strong>--vim-file-bufnr</strong> can be specified multiple times.</p>
+<p>Set the <em>bufnr</em> property for errors printed with the <strong>--output-format=vim-qflist-json</strong> option.</p>
+<div class="paragraph">
+<p><strong>--vim-file-bufnr</strong> applies only to the next input file given in the command line.
+Therefore, if multiple input files are given, <strong>--vim-file-bufnr</strong> can be specified multiple times.</p>
+</div>
 </dd>
 </dl>
 </div>

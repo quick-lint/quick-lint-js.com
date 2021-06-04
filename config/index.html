@@ -93,8 +93,12 @@ and also quick-lint-js editor plugins, can be configured using a <code>quick-lin
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Remember the directory containing the input JavaScript file as the <em>current directory</em>.
-If the input JavaScript file has no path, remember the current working directory as the <em>current directory</em>.</p>
+<p>Compute the absolute canonical path of the input JavaScript file by joining the JavaScript file&#8217;s given path with the current working directory, following all symbolic links, and resolving all <code>.</code> and <code>..</code> components.
+Remove the last component of the absolute canonical path.
+Remember this path as the <em>current directory</em>.</p>
+<div class="paragraph">
+<p>If the input JavaScript file has no path (e.g. if its contents are given using standard input), remember the current working directory as the <em>current directory</em>.</p>
+</div>
 </li>
 <li>
 <p>Look for a configuration file in the <em>current directory</em>:</p>
@@ -122,9 +126,7 @@ If so, use it as the configuration file and stop.</p>
 <p>If the <em>current directory</em> is a filesystem root, assume no configuration file and stop.</p>
 </li>
 <li>
-<p>Remember the parent of the <em>current directory</em> as the <em>current directory</em>.
-The parent of a directory is determined by suffixing a <code>..</code> component to the directory&#8217;s path.
-(This method of determining the parent affects how symbolic links in paths are handled.)</p>
+<p>Remove the last component of the <em>current directory</em>.</p>
 </li>
 <li>
 <p>Go to step 2.</p>
@@ -240,7 +242,7 @@ Pre-defined categories of global variables which programs can use.
 <div class="paragraph">
 <p>If <strong>global-groups</strong> is a non-empty array, then global variables are defined per the given group names.
 Each group name is a string.
-For the list of group names, see the <a href="#Global groups">[Global groups]</a> section.</p>
+For the list of group names, see the <a href="#global-groups">Global Groups</a> section.</p>
 </div>
 </div>
 </div>
