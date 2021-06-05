@@ -1,6 +1,6 @@
 # quick-lint-js licenses
 
-The quick-lint-js program is Copyright (C) 2020 Matthew Glazar. It is
+The quick-lint-js program is Copyright (C) 2020 Matthew "strager" Glazar. It is
 distributed under the following license:
 >                     GNU GENERAL PUBLIC LICENSE
 >                        Version 3, 29 June 2007
