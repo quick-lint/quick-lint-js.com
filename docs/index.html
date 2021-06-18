@@ -10,25 +10,18 @@
 
 
 
-    <title>quick-lint-js: contacting the dev team</title>
-    <meta
-      name="description"
-      content="Report bugs and ask questions about quick-lint-js."
-    />
+    <title>quick-lint-js: documentation</title>
     <link href="../main.css" rel="stylesheet" />
     <style>
-      dd {
-        margin-top: 0.25em;
-      }
-
-      dd + dt {
-        margin-top: 1em;
+      .link-list li {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
       }
     </style>
   </head>
   <body class="side-bar-nav">
     <header>
-      <h1><a href="..">quick-lint-js</a></h1>
+      <h1><a href="../">quick-lint-js</a></h1>
       <p class="tag-line">quick-lint-js finds bugs in JavaScript programs.</p>
       
 
@@ -48,15 +41,28 @@
         <a href="../demo/">Try online</a>
       </li>   
     <li>
-      <li>
-        <a href="../docs/">Docs</a>
-       
+      <li><span class="current-page">Docs</span> 
+      <ul>
+         <li>
+        <a href="../errors/">Errors</a>
+      </li>
+         <li>
+        <a href="../cli/">CLI</a>
+      </li>
+         <li>
+        <a href="../config/">Config</a>
+      </li>
+        
+      </ul>
+      
     </li>
        <li>
         <a href="../benchmarks/">Benchmarks</a>
       </li>    <li>
         <a href="https://github.com/quick-lint/quick-lint-js">Code on GitHub</a>
-      </li>    <li><span class="current-page">Contact</span></li>  
+      </li>    <li>
+        <a href="../contact/">Contact</a>
+      </li>  
   </ul>
 </nav>
 
@@ -65,62 +71,38 @@
     </header>
 
     <main>
-      <h2>Contact quick-lint-js devs</h2>
-      <p>
-        Found a bug? Want a feature? Have a question? Here's how to contact the
-        quick-lint-js development team.
-      </p>
+      <h2>Documentation</h2>
 
-      <dl>
-        <dt>bug reports</dt>
-        <dt>feature requests</dt>
-        <dd>
-          <a href="https://github.com/quick-lint/quick-lint-js/issues"
-            >File an issue on GitHub</a
-          >
-        </dd>
-        <dt>questions and support</dt>
-        <dd>
-          <a href="https://github.com/quick-lint/quick-lint-js/issues"
-            >File an issue on GitHub</a
-          >
-        </dd>
-        <dd>
-          Chat on IRC:
-          <a
-            href="https://kiwiirc.com/nextclient/irc.libera.chat/#quick-lint-js"
-            >#quick-lint-js on Libera.Chat</a
-          >
-        </dd>
-        <dd>
-          Chat with the
-          <a href="https://www.twitch.tv/strager">lead developer on Twitch</a>
-        </dd>
-        <dt>security bug reports (private disclosure)</dt>
-        <dd>
-          Email:
-          <a href="mailto:strager.nds@gmail.com">strager.nds@gmail.com</a>
-        </dd>
-      </dl>
-
-      <p>
-        quick-lint-js currently has no mailing list. If you want one, please let
-        me know.
-      </p>
+      <ul class="link-list">
+        <li>
+          <a href="../install/">Installing quick-lint-js</a> and editor plugins
+        </li>
+        <li>
+          <a href="../cli/">CLI manual</a> for the
+          <code>quick-lint-js</code> command
+        </li>
+        <li><a href="../errors/">Error codes</a> and examples</li>
+        <li>
+          <a href="../config/">Configuring quick-lint-js</a> with a
+          <code>quick-lint-js.config</code> file
+        </li>
+      </ul>
     </main>
 
     <footer>
       <nav>
         <ul>
-          <li><a href="..">quick-lint-js home page</a></li>
+          <li><a href="../">quick-lint-js home page</a></li>
+          <li><a href="../hiring/">we're hiring! get paid to code</a></li>
           <li><a href="../benchmarks/">benchmarks vs other linters</a></li>
-          <li><a href="../demo/">try quick-lint-js in your browser</a></li>
           <li>
             <a href="https://github.com/quick-lint/quick-lint-js"
               >source code on GitHub</a
             >
           </li>
-          <li><a href="../license/">copyright and license information</a></li>
+          <li>
+            <a href="../license/">copyright and license information</a>
+          </li>
         </ul>
       </nav>
     </footer>
@@ -145,8 +127,4 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with quick-lint-js.  If not, see <https://www.gnu.org/licenses/>.
--->
-<!--
-Other files may have different copyright and may be licensed under different
-licenses. See license/ for details.
 -->
