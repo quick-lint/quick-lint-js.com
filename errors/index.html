@@ -202,6 +202,12 @@
         </li>
         
         <li>
+          <a href="#E133"
+            >E133: error generator function star belongs before name</a
+          >
+        </li>
+        
+        <li>
           <a href="#E160"
             >E160: unexpected &#39;=&gt;&#39;; expected parameter for arrow function, but got an expression instead</a
           >
@@ -210,6 +216,12 @@
         <li>
           <a href="#E202"
             >E202: missing &#39;=&#39; after variable</a
+          >
+        </li>
+        
+        <li>
+          <a href="#E204"
+            >E204: error generator function star belongs after keyword function</a
           >
         </li>
         
@@ -414,6 +426,10 @@ console.log(x);
 <figure><pre><code>#!/usr/bin/env node
 let x = 3;
 console.log(x);
+</code></pre></figure></article>  <article id='E133'><h2><a class='self-reference' href='#E133'>E133: error generator function star belongs before name</a></h2><p>The following code has misplaced '*'.</p>
+<figure><pre><code><mark>*</mark>function f(x) { yield x; }
+</code></pre></figure><p>To fix this error, move the '*' before function name.</p>
+<figure><pre><code>function *f(x) { yield x; }
 </code></pre></figure></article>  <article id='E160'><h2><a class='self-reference' href='#E160'>E160: unexpected '=&gt;'; expected parameter for arrow function, but got an expression instead</a></h2><p>The left-hand side of <code>=&gt;</code> must be a list of parameters. It is a syntax error if
 the left-hand side is instead an expression (such as a property access or a
 function call):</p>
@@ -437,6 +453,10 @@ fs.mkdir(path, () =&gt; console.log("done"));
 <figure><pre><code>let x<mark></mark> new Array();
 </code></pre></figure><p>To fix this error, add '=' after variable <code>x</code>.</p>
 <figure><pre><code>let x = new Array();
+</code></pre></figure></article>  <article id='E204'><h2><a class='self-reference' href='#E204'>E204: error generator function star belongs after keyword function</a></h2><p>The following code has misplaced '*'.</p>
+<figure><pre><code>let x = <mark>*</mark>function(y) { yield y; };
+</code></pre></figure><p>To fix this error, move the '*' after the keyword function.</p>
+<figure><pre><code>let x = function*(y) { yield y; };
 </code></pre></figure></article> 
     </main>
 

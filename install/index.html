@@ -229,9 +229,12 @@
                   src="../gnome-terminal.svg"
                   alt=""
                   aria-labelledby="install-artifact-cli"
-                /><br /><span id="install-artifact-cli">CLI</span>
+                />&nbsp;<span id="install-artifact-cli"
+                  ><abbr title="command line interface">CLI</abbr>
+                  &amp;<br /><abbr title="language server protocol">LSP</abbr>
+                  server</span
+                >
               </th>
-              <th>LSP server</th>
               <th>
                 <img
                   class="install-logo"
@@ -294,26 +297,23 @@
                 <a href="#npm">
                   <span
                     ><span aria-label="installed">✅</span
-                    ><span
-                      aria-label="goodies not included"
-                      title="goodies not included"
-                      class="footnote-marker"
-                      >&nbsp;*</span
+                    ><span class="footnote-marker"
+                      ><span
+                        aria-label="goodies not included"
+                        title="goodies not included"
+                        >&nbsp;*</span
+                      ><span
+                        aria-label="not installed globally"
+                        title="not installed globally"
+                        >†</span
+                      ></span
                     ></span
-                  >
-                </a>
+                  ></a
+                >
               </td>
               <td class="meh">
                 <a href="#npm"
-                  ><span
-                    ><span aria-label="installed">✅</span
-                    ><span
-                      aria-label="not installed globally"
-                      title="not installed globally"
-                      class="footnote-marker"
-                      >&nbsp;†</span
-                    ></span
-                  ></a
+                  ><span><span aria-label="installed">✅</span></span></a
                 >
               </td>
               <td><span aria-label="not installed"></span></td>
@@ -343,9 +343,6 @@
               </td>
               <td class="os"></td>
 
-              <td class="good">
-                <a href="#homebrew"><span aria-label="installed">✅</span></a>
-              </td>
               <td class="good">
                 <a href="#homebrew"><span aria-label="installed">✅</span></a>
               </td>
@@ -384,9 +381,6 @@
               <td class="os"></td>
               <td class="os"></td>
 
-              <td class="good">
-                <a href="#debian"><span aria-label="installed">✅</span></a>
-              </td>
               <td class="good">
                 <a href="#debian"><span aria-label="installed">✅</span></a>
               </td>
@@ -429,9 +423,6 @@
               <td class="good">
                 <a href="#nix"><span aria-label="installed">✅</span></a>
               </td>
-              <td class="good">
-                <a href="#nix"><span aria-label="installed">✅</span></a>
-              </td>
               <td><span aria-label="not installed"></span></td>
               <td><span aria-label="not installed"></span></td>
             </tr>
@@ -461,9 +452,6 @@
               <td class="os"></td>
               <td class="os"></td>
 
-              <td class="good">
-                <a href="#arch-linux"><span aria-label="installed">✅</span></a>
-              </td>
               <td class="good">
                 <a href="#arch-linux"><span aria-label="installed">✅</span></a>
               </td>
@@ -513,7 +501,6 @@
               </td>
 
               <td><span aria-label="not installed"></span></td>
-              <td><span aria-label="not installed"></span></td>
               <td class="good">
                 <a href="#vscode-marketplace"
                   ><span aria-label="installed">✅</span></a
@@ -561,7 +548,6 @@
                 />
               </td>
 
-              <td><span aria-label="not installed"></span></td>
               <td><span aria-label="not installed"></span></td>
               <td class="good">
                 <a href="#open-vsx"><span aria-label="installed">✅</span></a>
@@ -611,9 +597,6 @@
                 >
               </td>
               <td class="good">
-                <a href="#manual"><span aria-label="installed">✅</span></a>
-              </td>
-              <td class="good">
                 <a href="#manual-vscode"
                   ><span aria-label="installed">✅</span></a
                 >
@@ -651,7 +634,6 @@
 
               <td><span aria-label="not installed"></span></td>
               <td><span aria-label="not installed"></span></td>
-              <td><span aria-label="not installed"></span></td>
               <td class="good">
                 <a href="#manual-vim"><span aria-label="installed">✅</span></a>
               </td>
@@ -685,7 +667,6 @@
                 />
               </td>
 
-              <td class="good"><span aria-label="installed">✅</span></td>
               <td class="good"><span aria-label="installed">✅</span></td>
               <td class="good"><span aria-label="installed">✅</span></td>
               <td class="good"><span aria-label="installed">✅</span></td>
@@ -863,6 +844,15 @@
                   src="../ubuntu.svg"
                   alt=""
                 />&nbsp;Ubuntu</a
+              >
+            </li>
+            <li>
+              <a href="#arch-linux"
+                ><img
+                  class="install-logo"
+                  src="../arch-linux.svg"
+                  alt=""
+                />&nbsp;Arch Linux</a
               >
             </li>
             <li><a href="#manual-vim">Manual</a></li>
