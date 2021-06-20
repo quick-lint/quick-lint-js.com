@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!-- Copyright (C) 2020  Matthew "strager" Glazar -->
+<!-- See end of file for extended copyright information. -->
+<html lang="en">
+  <head>
+    
+
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+
+
+
+    <script>
+      //
+    </script>
+    <title>quick-lint-js: releases</title>
+    <meta name="description" content="Older versions of quick-lint-js" />
+    <link href="../main.css" rel="stylesheet" />
+  </head>
+  <body class="side-bar-nav">
+    <header>
+      <h1><a href="..">quick-lint-js</a></h1>
+      <p class="tag-line">quick-lint-js finds bugs in JavaScript programs.</p>
+      
+
+<script>
+  //
+</script>
+
+<nav>
+  <ul>
+    
+    <li class="side-bar-only">
+      <a href="../">Home</a>
+    </li>
+      
+    <li>
+      <li>
+        <a href="../install/">Install</a>
+       
+      <ul>
+         <li><span class="current-page">Releases</span></li>
+        
+      </ul>
+      
+    </li>
+       <li>
+        <a href="../demo/">Try online</a>
+      </li>   
+    <li>
+      <li>
+        <a href="../docs/">Docs</a>
+       
+    </li>
+       <li>
+        <a href="../benchmarks/">Benchmarks</a>
+      </li>    <li>
+        <a href="https://github.com/quick-lint/quick-lint-js">Code on GitHub</a>
+      </li>    <li>
+        <a href="../contact/">Contact</a>
+      </li>  
+  </ul>
+</nav>
+
+
+
+    </header>
+
+    <main>
+      <h2>Releases &amp; change log</h2>
+
+      <article>
+        <p>This document chronicles quick-lint-js' releases. This document's format is
+based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>.</p>
+<p>quick-lint-js' version numbers are arbitrary. quick-lint-js does <em>not</em> adhere to
+Semantic Versioning.</p>
+<h3>Unreleased</h3>
+<p>Beta release.</p>
+<h4>Security</h4>
+<ul>
+<li>Vim plugin: Version 0.2.0 executed <code>node_modules/.bin/quick-lint-js</code> without
+validating that the program is really quick-lint-js. The plugin now
+conservatively ignores <code>quick-lint-js</code> in <code>node_modules</code> by default.</li>
+</ul>
+<h4>Added</h4>
+<ul>
+<li>New JS syntax: <code>.?</code>, class fields, <code>import.meta</code>, top-level <code>await</code>,
+<code>#privateProperties</code></li>
+<li>Translations: Swedish (implemented by <a href="https://github.com/Lindenbyte">Kim &quot;Linden&quot;</a>)</li>
+<li>Emacs plugin (implemented by <a href="https://github.com/wgrr">wagner riffel</a>)</li>
+<li>Neovim plugin</li>
+<li>Global variables can be configured using a <code>quick-lint-js.config</code> file</li>
+<li>Errors and warnings are now documented on the website</li>
+<li>Various new errors and error message improvements (implemented by
+<a href="https://github.com/AidenThing">AidenThing</a>, <a href="https://github.com/erlliam">Erlliam Mejia</a>, <a href="https://github.com/singalhimanshu">Himanshu</a>, <a href="https://github.com/LeeWannacott">Lee Wannacott</a>, <a href="https://github.com/keyehzy">Matheus
+Sousa</a>)</li>
+<li>Shell completion for the CLI (Bash, Fish, Zsh) (implemented by <a href="https://github.com/maniac-en">Shivam
+Mehta</a>)</li>
+<li><code>--stdin</code> CLI option allows reading JavaScript from standard input instead of
+a file (implemented by <a href="https://github.com/wgrr">wagner riffel</a>)</li>
+</ul>
+<h4>Fixed</h4>
+<ul>
+<li><code>with</code> statements and <code>eval</code> no longer cause spurious undeclared variable
+warnings (implemented by <a href="https://github.com/singalhimanshu">Himanshu</a>)</li>
+<li><code>++a[0];</code> no longer reports an assignment-to-const-variable error if <code>a</code> was
+declared with <code>const</code> (implemented by <a href="https://github.com/singalhimanshu">Himanshu</a>)</li>
+<li><code>'undefined' === typeof foo ? 3 : 4</code> no longer reports a warning that <code>foo</code> is
+undeclared</li>
+<li>Building tests with GCC 11.1.1 no longer fails due to <code>-Werror</code></li>
+<li>Various crashes given invalid JavaScript no longer happen</li>
+<li>Building the VS Code plugin now works on Windows (implemented by [Jimmy
+Qiu][])</li>
+</ul>
+<h3>0.2.0 (2021-04-05)</h3>
+<p>Beta release.</p>
+<p><a href="https://c.quick-lint-js.com/releases/0.2.0/">Downloads</a></p>
+
+      </article>
+    </main>
+
+    <footer>
+      <nav>
+        <ul>
+          <li><a href="..">quick-lint-js home page</a></li>
+          <li><a href="../hiring/">we're hiring! get paid to code</a></li>
+          <li><a href="../benchmarks/">benchmarks vs other linters</a></li>
+          <li><a href="../demo/">try quick-lint-js in your browser</a></li>
+          <li>
+            <a href="https://github.com/quick-lint/quick-lint-js"
+              >source code on GitHub</a
+            >
+          </li>
+          <li><a href="../license/">copyright and license information</a></li>
+        </ul>
+      </nav>
+    </footer>
+  </body>
+</html>
+
+<!--
+quick-lint-js finds bugs in JavaScript programs.
+Copyright (C) 2020  Matthew "strager" Glazar
+
+This file is part of quick-lint-js.
+
+quick-lint-js is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+quick-lint-js is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with quick-lint-js.  If not, see <https://www.gnu.org/licenses/>.
+-->
