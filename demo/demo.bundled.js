@@ -363,6 +363,11 @@
           let splitIndex = currentMark.end - this._currentOffset;
           this._markEndNode = splitNodeAtMarkEnd(splitIndex);
           let mark = this._window.document.createElement("mark");
+          if (currentMark.message && currentMark.code && currentMark.severity) {
+            mark.setAttribute("data-message", currentMark.message);
+            mark.setAttribute("data-code", currentMark.code);
+            mark.setAttribute("data-severity", currentMark.severity);
+          }
           if (this._markBeginNode === this._markEndNode.nextSibling) {
             if (currentMark.begin !== currentMark.end) {
               throw new Error("Unexpected: markBeginNode comes after markEndNode, but this should only happen if the current mark is empty");
@@ -489,4 +494,47 @@
     shadowCodeInputElement.style.width = codeInputElement.style.width;
     shadowCodeInputElement.style.height = codeInputElement.style.height;
   }
+  function showErrorMessageBox(mark, posCursorX) {
+    const div = createErrorBox(mark, posCursorX, mark.attributes["data-message"].value, mark.attributes["data-code"].value, mark.attributes["data-severity"].value);
+    let body = document.querySelector("body");
+    body.appendChild(div);
+  }
+  function createErrorBox(markedElement, posCursorX, errorMessage, code, severity) {
+    let div = document.createElement("div");
+    const { bottom } = markedElement.getBoundingClientRect();
+    div.setAttribute("id", "error-box");
+    div.innerText = `${code} - ${errorMessage}`;
+    div.style.position = "fixed";
+    div.style.overflow = "auto";
+    div.style.top = `${Math.trunc(bottom)}px`;
+    div.style.left = `${posCursorX}px`;
+    return div;
+  }
+  function removeErrorMessageBox() {
+    document.querySelector("#error-box")?.remove();
+  }
+  function showErrorMessage(event) {
+    removeErrorMessageBox();
+    const shadowInput = document.querySelector("#shadow-code-input");
+    const marks = shadowInput.querySelectorAll("mark");
+    for (let mark of marks) {
+      const markRect = mark.getBoundingClientRect();
+      if (cursorOverMark(event.clientX, event.clientY, markRect)) {
+        showErrorMessageBox(mark, event.clientX);
+        break;
+      }
+    }
+  }
+  function cursorOverMark(cursorPosX, cursorPosY, markRect) {
+    const topDownIn = markRect.bottom >= cursorPosY && cursorPosY >= markRect.top;
+    const leftRightIn = cursorPosX >= markRect.left && cursorPosX <= markRect.left + markRect.width;
+    return topDownIn && leftRightIn;
+  }
+  document.addEventListener("DOMContentLoaded", () => {
+    const codeInput = document.querySelector("#code-input");
+    codeInput.addEventListener("mousemove", showErrorMessage);
+    codeInput.addEventListener("input", removeErrorMessageBox);
+    codeInput.addEventListener("click", removeErrorMessageBox);
+    codeInput.addEventListener("mouseout", removeErrorMessageBox);
+  });
 })();
