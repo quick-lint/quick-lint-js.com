@@ -681,10 +681,10 @@ Parts of quick-lint-js might be distributed under different licenses:
 
 ## boost
 
-Version 1.74.0 of boost is statically linked into quick-lint-js.
+Version 1.76.0 of boost is statically linked into quick-lint-js.
 
 Source code for boost is available at:
-* https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.tar.bz2
+* https://boostorg.jfrog.io/artifactory/main/release/1.76.0/source/boost_1_76_0.tar.bz2
 
 Copyright information for libc6-dev:amd64:
 > Boost Software License - Version 1.0 - August 17th, 2003

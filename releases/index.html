@@ -74,7 +74,7 @@
 based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>.</p>
 <p>quick-lint-js' version numbers are arbitrary. quick-lint-js does <em>not</em> adhere to
 Semantic Versioning.</p>
-<h3>Unreleased</h3>
+<h3>0.3.0 (2021-07-02)</h3>
 <p>Beta release.</p>
 <h4>Security</h4>
 <ul>
@@ -89,18 +89,21 @@ conservatively ignores <code>quick-lint-js</code> in <code>node_modules</code> b
 <li>Translations: Swedish (implemented by <a href="https://github.com/Lindenbyte">Kim &quot;Linden&quot;</a>)</li>
 <li>Emacs plugin (implemented by <a href="https://github.com/wgrr">wagner riffel</a>)</li>
 <li>Neovim plugin</li>
-<li>Global variables can be configured using a <code>quick-lint-js.config</code> file</li>
 <li>Errors and warnings are now documented on the website</li>
 <li>Various new errors and error message improvements (implemented by
-<a href="https://github.com/AidenThing">AidenThing</a>, <a href="https://github.com/erlliam">Erlliam Mejia</a>, <a href="https://github.com/singalhimanshu">Himanshu</a>, <a href="https://github.com/LeeWannacott">Lee Wannacott</a>, <a href="https://github.com/keyehzy">Matheus
-Sousa</a>)</li>
+<a href="https://github.com/AidenThing">AidenThing</a>, <a href="https://github.com/dlarocque">Daniel La Rocque</a>, <a href="https://github.com/erlliam">Erlliam Mejia</a>, <a href="https://github.com/singalhimanshu">Himanshu</a>, <a href="https://github.com/LeeWannacott">Lee
+Wannacott</a>, <a href="https://github.com/keyehzy">Matheus Sousa</a>)</li>
 <li>Shell completion for the CLI (Bash, Fish, Zsh) (implemented by <a href="https://github.com/maniac-en">Shivam
 Mehta</a>)</li>
 <li><code>--stdin</code> CLI option allows reading JavaScript from standard input instead of
 a file (implemented by <a href="https://github.com/wgrr">wagner riffel</a>)</li>
+<li>Partially implemented: Global variables can be configured using a
+<code>quick-lint-js.config</code> file</li>
 </ul>
 <h4>Fixed</h4>
 <ul>
+<li>Using browser variables such as <code>document</code> and <code>window</code> no longer reports
+undesired undeclared variable warnings</li>
 <li><code>with</code> statements and <code>eval</code> no longer cause spurious undeclared variable
 warnings (implemented by <a href="https://github.com/singalhimanshu">Himanshu</a>)</li>
 <li><code>++a[0];</code> no longer reports an assignment-to-const-variable error if <code>a</code> was

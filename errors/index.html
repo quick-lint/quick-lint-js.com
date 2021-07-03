@@ -113,6 +113,8 @@
         quick-lint-js can find the following warnings and errors in your code:
       </p>
 
+      
+
       <ul class="table-of-contents">
         
         <li>
@@ -214,6 +216,12 @@
         <li>
           <a href="#E160"
             >E160: unexpected &#39;=&gt;&#39;; expected parameter for arrow function, but got an expression instead</a
+          >
+        </li>
+        
+        <li>
+          <a href="#E165"
+            >E165: TypeScript style const field</a
           >
         </li>
         
@@ -465,6 +473,14 @@ fs.mkdir(path () <mark data-message="unexpected '=>'" data-code="E160" data-seve
 <figure><pre><code>let fs = require("fs");
 let path = process.argv[2];
 fs.mkdir(path, () =&gt; console.log("done"));
+</code></pre></figure></article>  <article id='E165'><h2><a class='self-reference' href='#E165'>E165: TypeScript style const field</a></h2><p><code>const</code> fields are only allowed in TypeScript, not JavaScript</p>
+<figure><pre><code>class C {
+  <mark data-message="const fields within classes are only allowed in TypeScript, not JavaScript" data-code="E165" data-severity="1">const</mark> f = null;
+} 
+</code></pre></figure><p>To fix this error, remove the <code>const</code> declarator from the field</p>
+<figure><pre><code>class C {
+  f = null;
+} 
 </code></pre></figure></article>  <article id='E202'><h2><a class='self-reference' href='#E202'>E202: missing '=' after variable</a></h2><p>The following code has a missing equal '=' after variable name.</p>
 <figure><pre><code>let x<mark data-message="missing '=' after variable" data-code="E202" data-severity="1"></mark> new Array();
 </code></pre></figure><p>To fix this error, add '=' after variable <code>x</code>.</p>
