@@ -149,6 +149,9 @@ Use this mode to integrate with code editors supporting LSP.</p>
 <li>
 <p><strong>vim-qflist-json</strong>: machine-readable JSON which can be given to Vim&#8217;s <em>setqflist</em> function.</p>
 </li>
+<li>
+<p><strong>emacs-lisp</strong>: Emacs Lisp association list format.</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
@@ -165,6 +168,23 @@ Use this mode to integrate with code editors supporting LSP.</p>
 Therefore, if multiple input files are given, <strong>--vim-file-bufnr</strong> can be specified multiple times.</p>
 </div>
 </dd>
+<dt class="hdlist1"><strong>--path-for-config-search</strong>=<em>path</em></dt>
+<dd>
+<p>  For the following input file or <strong>--stdin</strong>, use <em>path</em> as the file&#8217;s path when
+<a href="../config/">searching for a configuration file</a>.</p>
+<div class="paragraph">
+<p><em>path</em> must be a syntactically-valid path.
+<em>path</em> does not need to exist in the filesystem.</p>
+</div>
+<div class="paragraph">
+<p><strong>--path-for-config-search</strong> applies only to the next input file given in the command line.
+Therefore, if multiple input files are given, <strong>--path-for-config-search</strong> can be specified multiple times.
+If <strong>--path-for-config-search</strong> is the last option, it has no effect.</p>
+</div>
+<div class="paragraph">
+<p>Incompatible with <strong>--lsp-server</strong>.</p>
+</div>
+</dd>
 </dl>
 </div>
 <div id="config-file" class="dlist">
@@ -178,7 +198,7 @@ See the <a href="../config/">config docs</a> for the format of configuration fil
 See the <a href="#examples">Example</a> section for an example.</p>
 </div>
 <div class="paragraph">
-<p>If <strong>--config-file</strong> is not given, an empty configuration file is assumed.</p>
+<p>If <strong>--config-file</strong> is not given, <strong>quick-lint-js</strong> <a href="../config/">searches for a configuration file</a>.</p>
 </div>
 <div class="paragraph">
 <p>Incompatible with <strong>--lsp-server</strong>.</p>
@@ -197,6 +217,13 @@ See the <a href="#examples">Example</a> section for an example.</p>
 <dt class="hdlist1"><strong>--stdin</strong></dt>
 <dd>
 <p>Read standard input as a JavaScript file.</p>
+<div class="paragraph">
+<p>If neither <strong>--config-file</strong> nor <strong>--path-for-config-search</strong> is specified, an empty configuration file is assumed.
+If <strong>--config-file</strong> is specified, <em>file</em> is used for linting standard input.
+If <strong>--path-for-config-search</strong> is specified and <strong>--config-file</strong> is not specified,
+<strong>quick-lint-js</strong> <a href="../config/">searches for a configuration file</a>
+starting from <strong>--path-for-config-search</strong>'s <em>path</em>.</p>
+</div>
 <div class="paragraph">
 <p>Incompatible with <strong>--lsp-server</strong>.</p>
 </div>
@@ -409,6 +436,19 @@ $ echo $?
 <pre>$ <strong>quick-lint-js</strong> \
     --config-file strict-quick-lint-js.config src/index.js src/helpers.js \
     --config-file lax-quick-lint-js.config test/test-app.js</pre>
+</div>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>To lint a temporary file, but use the configuration file of a project:</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="listingblock">
+<div class="content">
+<pre>$ <strong>quick-lint-js</strong> --path-for-config-search=src/server.js /tmp/unsaved/unsaved12m1uz.js
+/tmp/unsaved/unsaved12m1uz.js:12:5: warning: use of undeclared variable: document [E057]</pre>
 </div>
 </div>
 </blockquote>

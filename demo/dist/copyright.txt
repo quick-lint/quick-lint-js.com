@@ -713,10 +713,10 @@ Copyright information for libc6-dev:amd64:
 
 ## simdjson
 
-Version 0.9.4 of simdjson is statically linked into quick-lint-js.
+Version 0.9.6 of simdjson is statically linked into quick-lint-js.
 
 Source code for simdjson is available at:
-* https://github.com/simdjson/simdjson/archive/v0.9.4.tar.gz
+* https://github.com/simdjson/simdjson/archive/refs/tags/v0.9.6.tar.gz
 
 Copyright information for libc6-dev:amd64:
 >                                  Apache License

@@ -108,11 +108,26 @@ and also quick-lint-js editor plugins, can be configured using a <code>quick-lin
 <div class="olist arabic">
 <ol class="arabic">
 <li>
+<p>If the input JavaScript file has no path (e.g. if its contents are given using standard input (<strong>--stdin</strong>) and the <strong>--path-for-config-search</strong> option is not used), assume no configuration file and stop.</p>
+</li>
+<li>
 <p>Compute the absolute canonical path of the input JavaScript file by joining the JavaScript file&#8217;s given path with the current working directory, following all symbolic links, and resolving all <code>.</code> and <code>..</code> components.
-Remove the last component of the absolute canonical path.
+(If the <strong>--path-for-config-search</strong> option was used, compute its absolute canonical path.)</p>
+</li>
+<li>
+<p>Check if the absolute canonical path computed in step 2 exists.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>If the path exists, remove the last component of the path.
 Remember this path as the <em>current directory</em>.</p>
-<div class="paragraph">
-<p>If the input JavaScript file has no path (e.g. if its contents are given using standard input), remember the current working directory as the <em>current directory</em>.</p>
+</li>
+<li>
+<p>If the path does not exist, remove the last component of the path repeatedly until the path exists.
+If no checked path exists (for example, if a path with a non-existent drive was given), assume no configuration file and stop.
+Remember this path as the <em>current directory</em>.</p>
+</li>
+</ol>
 </div>
 </li>
 <li>
@@ -132,7 +147,7 @@ If so, use it as the configuration file and stop.</p>
 If so, use it as the configuration file and stop.</p>
 </li>
 <li>
-<p>Go to step 3.</p>
+<p>Go to step 5.</p>
 </li>
 </ol>
 </div>
@@ -144,7 +159,7 @@ If so, use it as the configuration file and stop.</p>
 <p>Remove the last component of the <em>current directory</em>.</p>
 </li>
 <li>
-<p>Go to step 2.</p>
+<p>Go to step 4.</p>
 </li>
 </ol>
 </div>
