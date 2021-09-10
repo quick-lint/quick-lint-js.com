@@ -76,6 +76,13 @@ based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>.</p
 Semantic Versioning.</p>
 <h3>Unreleased</h3>
 <p>Beta release.</p>
+<h4>Fixed</h4>
+<ul>
+<li>Nothing yet!</li>
+</ul>
+<h3>0.4.0 (2021-09-09)</h3>
+<p>Beta release.</p>
+<p><a href="https://c.quick-lint-js.com/releases/0.4.0/">Downloads</a></p>
 <h4>Changed</h4>
 <ul>
 <li>CLI: The <code>--stdin</code> option (and <code>-</code>) no longer search for configuration files
@@ -86,17 +93,23 @@ search for configuration files.</li>
 <li>Vim: For unnamed buffers, the ALE plugin no longer searches for configuration
 files in the current working directory's parent and ancestors. Name the buffer
 using the <code>:file</code> command if you want a configuration file to take effect.</li>
+<li>VS Code: The plugin has been rewritten. Performance should be better, but
+stability and compatibility might suffer. For example, VS Code on Apple
+silicon (AArch64 CPUs) has not been tested and will likely no longer work.
+Please report compatibility issues.</li>
 </ul>
 <h4>Added</h4>
 <ul>
 <li>Various new errors (implemented by <a href="https://github.com/singalhimanshu">Himanshu</a>)</li>
 <li>CLI: <code>--path-for-config-search</code> allows customizing where configuration files
 are found for <code>--stdin</code></li>
-<li>Partially implemented: Global variables can be configured using a
-<code>quick-lint-js.config</code> file</li>
+<li>Global variables for several popular libraries are now recognized by default,
+including jQuery, Jasmine, and Jest</li>
 <li>Syntax and schema errors in <code>quick-lint-js.config</code> no longer crash
 quick-lint-js. Instead, these errors are highlighted similar to errors in
 JavaScript files.</li>
+<li>VS Code: <code>quick-lint-js.config</code> is now used when linting opened JavaScript
+files.</li>
 </ul>
 <h4>Fixed</h4>
 <ul>
@@ -105,7 +118,12 @@ JavaScript files.</li>
 <li>Building quick-lint-js no longer fails if a directory called <code>brew</code> exists
 anywhere in <code>$PATH</code></li>
 <li>Various crashes given invalid JavaScript no longer happen (implemented by
-<a href="https://github.com/wgrr">wagner riffel</a>)</li>
+<a href="https://github.com/wgrr">wagner riffel</a> and <a href="https://github.com/dav000">David Vasileff</a>)</li>
+<li><code>for (const x of xs)</code> no longer incorrectly reports E205 (missing initializer
+in const declaration) (fixed by <a href="https://github.com/singalhimanshu">Himanshu</a>)</li>
+<li>Windows: <code>quick-lint-js.config</code> files are now recognized if the containing
+directory contains non-ASCII characters</li>
+<li>Fix SSE2 corruption on 32-bit Windows builds with MSVC.</li>
 </ul>
 <h3>0.3.0 (2021-07-02)</h3>
 <p>Beta release.</p>

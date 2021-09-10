@@ -91,11 +91,8 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>The
-<a href="../cli/">quick-lint-js CLI</a>
+<a href="../cli/">quick-lint-js CLI</a>,
 and also quick-lint-js editor plugins, can be configured using a <code>quick-lint-js.config</code> file.</p>
-</div>
-<div class="paragraph">
-<p><strong>These configuration options are not yet implemented.</strong></p>
 </div>
 </div>
 </div>
@@ -143,10 +140,6 @@ If so, use it as the configuration file and stop.</p>
 If so, use it as the configuration file and stop.</p>
 </li>
 <li>
-<p>Check if the file <code>package.json</code> exists.
-If so, use it as the configuration file and stop.</p>
-</li>
-<li>
 <p>Go to step 5.</p>
 </li>
 </ol>
@@ -164,8 +157,8 @@ If so, use it as the configuration file and stop.</p>
 </ol>
 </div>
 <div class="paragraph">
-<p>In short, quick-lint-js looks for <code>quick-lint-js.config</code>, <code>.quick-lint-js.config</code>, or <code>package.json</code> in ancestor directories.
-If multiple files are found, <code>quick-lint-js.config</code> is used if present, otherwise <code>.quick-lint-js.config</code> is used if present.</p>
+<p>In short, quick-lint-js looks for <code>quick-lint-js.config</code> or <code>.quick-lint-js.config</code> in ancestor directories.
+If multiple files are found, <code>quick-lint-js.config</code> is used.</p>
 </div>
 <div class="paragraph">
 <p>If no configuration file is found, quick-lint-js behaves as if a <code>quick-lint-js.config</code> file was found with contents <code>{}</code>.</p>
@@ -214,25 +207,6 @@ For example:</p>
 }</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p><code>package.json</code> files contain UTF-8-encoded JSON.
-The <strong>quick-lint-js.config</strong> property of the top-level object contains quick-lint-js configuration properties.
-If the <strong>quick-lint-js.config</strong> property is missing, it is assumed to be an empty object ({}).
-A <code>package.json</code> file might look like this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "name": "my-npm-package",
-  "version": "0.1.0",
-  "quick-lint-js.config": {
-    "globals": {
-      "YUI": {"writable": false}
-    }
-  }
-}</code></pre>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -246,18 +220,16 @@ A <code>package.json</code> file might look like this:</p>
 <dt class="hdlist1"><strong>globals</strong></dt>
 <dd>
 <p>Optional.
-Global variables which programs can use.
-<strong>This configuration property is not yet implemented.</strong></p>
+Global variables which programs can use.</p>
 <div class="paragraph">
-<p><strong>globals</strong> is an object
+<p><strong>globals</strong> is an object.
 Its format is described in the <a href="#globals">Globals</a> section below.</p>
 </div>
 </dd>
 <dt class="hdlist1"><strong>global-groups</strong></dt>
 <dd>
 <p>Optional.
-Pre-defined categories of global variables which programs can use.
-<strong>This configuration property is not yet implemented.</strong></p>
+Pre-defined categories of global variables which programs can use.</p>
 <div class="openblock">
 <div class="content">
 <div class="paragraph">
@@ -345,7 +317,8 @@ JavaScript Unicode escapes (<strong>"\\u{68}llo"</strong>) are not allowed in th
 <p>all possible global variables.
 All global variables are defined as shadowable and writable.
 This in effect suppresses E002, E033, E057, or E059 entirely (except if variables are also configured using the <strong>globals</strong> configuration property).
-This group is not enabled by default.</p>
+This group is not enabled by default.
+<strong>This global group is not yet implemented.</strong></p>
 </dd>
 <dt class="hdlist1"><strong>browser</strong></dt>
 <dd>
@@ -401,27 +374,6 @@ Such an application might have the following <code>quick-lint-js.config</code> f
   "global-groups": ["browser", "ecmascript", "jest"],
   "globals": {
     "google": {"writable": false}
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Alternatively, the application might prefer to have fewer files in the project.
-In this case, the application configures quick-lint-js in its <code>package.json</code> file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "name": "acme",
-  "version": "1.2.1",
-  "devDependencies": {
-    "jest": "3.0.1"
-  },
-  "quick-lint-js.config": {
-    "global-groups": ["browser", "ecmascript", "jest"],
-    "globals": {
-      "google": {"writable": false}
-    }
   }
 }</code></pre>
 </div>

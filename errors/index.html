@@ -184,6 +184,48 @@
         </li>
         
         <li>
+          <a href="#E013"
+            >E013: code point out of range</a
+          >
+        </li>
+        
+        <li>
+          <a href="#E014"
+            >E014: expected expression before newline</a
+          >
+        </li>
+        
+        <li>
+          <a href="#E015"
+            >E015: expected expression before semicolon</a
+          >
+        </li>
+        
+        <li>
+          <a href="#E016"
+            >E016: expected hexadecimal digits in Unicode escape sequence</a
+          >
+        </li>
+        
+        <li>
+          <a href="#E017"
+            >E017: if statement needs parentheses around condition</a
+          >
+        </li>
+        
+        <li>
+          <a href="#E018"
+            >E018: if statement is missing &#39;(&#39; or &#39;)&#39; around condition</a
+          >
+        </li>
+        
+        <li>
+          <a href="#E019"
+            >E019: invalid binding in let statement</a
+          >
+        </li>
+        
+        <li>
           <a href="#E063"
             >E063: missing operator between expression and arrow function</a
           >
@@ -220,8 +262,50 @@
         </li>
         
         <li>
+          <a href="#E164"
+            >E164: JSON syntax error</a
+          >
+        </li>
+        
+        <li>
           <a href="#E165"
             >E165: TypeScript style const field</a
+          >
+        </li>
+        
+        <li>
+          <a href="#E166"
+            >E166: &#34;globals&#34; descriptor &#34;shadowable&#34; property must be a boolean</a
+          >
+        </li>
+        
+        <li>
+          <a href="#E167"
+            >E167: &#34;globals&#34; descriptor &#34;writable&#34; property must be a boolean</a
+          >
+        </li>
+        
+        <li>
+          <a href="#E168"
+            >E168: &#34;globals&#34; must be an object</a
+          >
+        </li>
+        
+        <li>
+          <a href="#E169"
+            >E169: &#34;global-groups&#34; must be a boolean or an array</a
+          >
+        </li>
+        
+        <li>
+          <a href="#E170"
+            >E170: &#34;global-groups&#34; entries must be strings</a
+          >
+        </li>
+        
+        <li>
+          <a href="#E171"
+            >E171: &#34;globals&#34; descriptor must be a boolean or an object</a
           >
         </li>
         
@@ -413,7 +497,103 @@ any of the following:</p>
 <li>ZWJ (U+200D)</li>
 <li>ZWNJ (U+200C)</li>
 </ul>
-</article>  <article id='E063'><h2><a class='self-reference' href='#E063'>E063: missing operator between expression and arrow function</a></h2><p>The left-hand side of <code>=&gt;</code> must be a list of parameters. It is a syntax error if
+</article>  <article id='E013'><h2><a class='self-reference' href='#E013'>E013: code point out of range</a></h2><p>A function or variable name includes a Unicode escape sequence, and the escape
+sequence refers to a character which is beyond the range of valid Unicode code
+points (U+0000 to U+10FFFF):</p>
+<figure><pre><code>class ChirpSound {}
+let bird<mark data-message="code point out of range" data-code="E013" data-severity="1">\u{360000}</mark> = new ChirpSound();
+</code></pre></figure><p>To fix this error, use the code point of a Unicode character which is in range:</p>
+<figure><pre><code>class ChirpSound {}
+let bird\u{3600} = new ChirpSound();
+</code></pre></figure></article>  <article id='E014'><h2><a class='self-reference' href='#E014'>E014: expected expression before newline</a></h2><p><code>throw</code> statements cannot have a newline between the <code>throw</code> keyword and the
+thrown expression:</p>
+<figure><pre><code>throw<mark data-message="expected expression before newline" data-code="E014" data-severity="1"></mark>
+  new Error(
+    "something terrible happened!"
+  );
+</code></pre></figure><p>To fix this error, add parentheses:</p>
+<figure><pre><code>throw (
+  new Error(
+    "something terrible happened!"
+  )
+);
+</code></pre></figure><p>Alternatively, start the expression on the same line as the <code>throw</code> keyword:</p>
+<figure><pre><code>throw new Error(
+  "something terrible happened!"
+);
+</code></pre></figure></article>  <article id='E015'><h2><a class='self-reference' href='#E015'>E015: expected expression before semicolon</a></h2><p><code>throw</code> statements require an expression following the <code>throw</code> keyword. It is an
+error to rethrow an exception by writing just <code>throw;</code>:</p>
+<figure><pre><code>try {
+  goNuts();
+} catch (e) {
+  console.error(`couldn't handle deez nuts: ${e}`);
+  throw<mark data-message="expected expression before semicolon" data-code="E015" data-severity="1">;</mark>
+}
+
+function goNuts() {}
+</code></pre></figure><p>To rethrow an exception, name the exception variable after <code>throw</code>:</p>
+<figure><pre><code>try {
+  goNuts();
+} catch (e) {
+  console.error(`couldn't handle deez nuts: ${e}`);
+  throw e;
+}
+
+function goNuts() {}
+</code></pre></figure></article>  <article id='E016'><h2><a class='self-reference' href='#E016'>E016: expected hexadecimal digits in Unicode escape sequence</a></h2><p>In variable names and strings, a Unicode escape sequence must contain only
+hexadecimal digits (any of <code>0123456789abcdefABCDEF</code>). It is an error if other
+characters appear within a Unicode escape sequence:</p>
+<figure><pre><code>console.log("List of Pok<mark data-message="expected hexadecimal digits in Unicode escape sequence" data-code="E016" data-severity="1">\ue9m</mark>on by weight:");
+console.log("Nidoran<mark data-message="expected hexadecimal digits in Unicode escape sequence" data-code="E016" data-severity="1">\u{2642 {male}</mark>");
+</code></pre></figure><p>For an escape sequence without <code>{</code> and <code>}</code>, add <code>{</code> and <code>}</code>:</p>
+<figure><pre><code>console.log("List of Pok\u{e9}mon by weight:");
+</code></pre></figure><p>Alternatively, for an escape sequence without <code>{</code> and <code>}</code>, include <code>0</code> digits
+such that the escape sequence contains exactly four hexadecimal digits:</p>
+<figure><pre><code>console.log("List of Pok\u00e9mon by weight:");
+</code></pre></figure><p>For an escape sequence with <code>{</code> and <code>}</code>, ensure the <code>}</code> appears after the
+hexadecimal digits:</p>
+<figure><pre><code>console.log("Nidoran\u{2642} {male}");
+</code></pre></figure></article>  <article id='E017'><h2><a class='self-reference' href='#E017'>E017: if statement needs parentheses around condition</a></h2><p>In JavaScript, <code>if</code> statements require parentheses around the condition. It is
+an error to omit the parentheses:</p>
+<figure><pre><code>if <mark data-message="if statement needs parentheses around condition" data-code="E017" data-severity="1">2 + 2 == 4</mark> {
+  console.log("Math works!");
+}
+</code></pre></figure><p>To fix this error, add <code>(</code> and <code>)</code>:</p>
+<figure><pre><code>if (2 + 2 == 4) {
+  console.log("Math works!");
+}
+</code></pre></figure></article>  <article id='E018'><h2><a class='self-reference' href='#E018'>E018: if statement is missing '(' or ')' around condition</a></h2><p>An <code>if</code> statement is missing either <code>(</code> before the condition or <code>)</code> after the
+condition:</p>
+<figure><pre><code>if (2 + 2 == 4<mark data-message="if statement is missing ')' around condition" data-code="E018" data-severity="1"></mark> {
+  console.log("Math works!");
+}
+if <mark data-message="if statement is missing '(' around condition" data-code="E018" data-severity="1"></mark>4 == 2 + 2) {
+  console.log("Jedi math works!");
+}
+</code></pre></figure><p>To fix this error, add the missing <code>(</code> or <code>)</code>:</p>
+<figure><pre><code>if (2 + 2 == 4) {
+  console.log("Math works!");
+}
+if (4 == 2 + 2) {
+  console.log("Jedi math works!");
+}
+</code></pre></figure></article>  <article id='E019'><h2><a class='self-reference' href='#E019'>E019: invalid binding in let statement</a></h2><p><code>const</code>, <code>let</code>, and <code>var</code> can only declare variables directly or by
+destructuring an array or an object. Number literals and keywords are not
+allowed where a variable name is expected:</p>
+<figure><pre><code>let wordCounts = {for: 4, if: 5, while: 0};
+let {<mark data-message="missing value for object property" data-code="E083" data-severity="1">for</mark>, <mark data-message="missing value for object property" data-code="E083" data-severity="1">if</mark>} = wordCounts;
+
+let queue = ["first", "second", "third"];
+let {first: <mark data-message="invalid function parameter" data-code="E151" data-severity="1">0</mark>} = queue;
+</code></pre></figure><p>To fix this error when destructuring an object with keyword keys, pick a
+variable name which is not a keyword:</p>
+<figure><pre><code>let wordCounts = {for: 4, if: 5, while: 0};
+let {for: forWordCount, if: ifWordCount} = wordCounts;
+</code></pre></figure><p>When destructuring an object, it's common to confuse the variable name with the
+key. Make sure the variable name comes after the <code>:</code>:</p>
+<figure><pre><code>let queue = ["first", "second", "third"];
+let {0: first} = queue;
+</code></pre></figure></article>  <article id='E063'><h2><a class='self-reference' href='#E063'>E063: missing operator between expression and arrow function</a></h2><p>The left-hand side of <code>=&gt;</code> must be a list of parameters. It is a syntax error if
 the left-hand side looks like a function call:</p>
 <figure><pre><code>let fs = require("fs");
 let path = process.argv[2];
@@ -485,6 +665,27 @@ fs.mkdir(path () <mark data-message="unexpected '=>'" data-code="E160" data-seve
 <figure><pre><code>let fs = require("fs");
 let path = process.argv[2];
 fs.mkdir(path, () =&gt; console.log("done"));
+</code></pre></figure></article>  <article id='E164'><h2><a class='self-reference' href='#E164'>E164: JSON syntax error</a></h2><p><a href="https://quick-lint-js.com/config/">quick-lint-js configuration files</a> (named <code>quick-lint-js.config</code> or
+<code>.quick-lint-js.config</code>) contain valid JSON (according to <a href="https://datatracker.ietf.org/doc/html/rfc8259">RFC8259</a>).
+quick-lint-js cannot read a configuration file with malformed JSON:</p>
+<figure><pre><code><mark data-message="JSON syntax error" data-code="E164" data-severity="1"></mark>{
+    "globals": {
+        // Google Analytics
+        "ga": true,
+        "google": true,
+    }
+}
+</code></pre></figure><p>Common mistakes in JSON are trailing commas (disallowed) and comments
+(disallowed).</p>
+<p>To fix this error, correct mistakes in the JSON syntax for your configuration
+file:</p>
+<figure><pre><code>{
+    "globals": {
+        " // Google Analytics": false,
+        "ga": true,
+        "google": true
+    }
+}
 </code></pre></figure></article>  <article id='E165'><h2><a class='self-reference' href='#E165'>E165: TypeScript style const field</a></h2><p><code>const</code> fields are only allowed in TypeScript, not JavaScript</p>
 <figure><pre><code>class C {
   <mark data-message="const fields within classes are only allowed in TypeScript, not JavaScript" data-code="E165" data-severity="1">const</mark> f = null;
@@ -493,6 +694,107 @@ fs.mkdir(path, () =&gt; console.log("done"));
 <figure><pre><code>class C {
   f = null;
 } 
+</code></pre></figure></article>  <article id='E166'><h2><a class='self-reference' href='#E166'>E166: &quot;globals&quot; descriptor &quot;shadowable&quot; property must be a boolean</a></h2><p>In a <a href="https://quick-lint-js.com/config/">quick-lint-js configuration file</a>, a entry in <code>&quot;globals&quot;</code> can have a
+descriptor object. A descriptor's <code>&quot;shadowable&quot;</code> property must be either <code>true</code>,
+<code>false</code>, or omitted.</p>
+<figure><pre><code>{
+    "globals": {
+        "gsap": {
+          "shadowable": <mark data-message="&quot;globals&quot; descriptor &quot;shadowable&quot; property must be a boolean" data-code="E166" data-severity="1">0</mark>
+        }
+    }
+}
+</code></pre></figure><p>To fix this error, make the <code>&quot;shadowable&quot;</code> property <code>true</code> or <code>false</code>:</p>
+<figure><pre><code>{
+    "globals": {
+        "gsap": {
+          "shadowable": false
+        }
+    }
+}
+</code></pre></figure></article>  <article id='E167'><h2><a class='self-reference' href='#E167'>E167: &quot;globals&quot; descriptor &quot;writable&quot; property must be a boolean</a></h2><p>In a <a href="https://quick-lint-js.com/config/">quick-lint-js configuration file</a>, a entry in <code>&quot;globals&quot;</code> can have a
+descriptor object. A descriptor's <code>&quot;writable&quot;</code> property must be either <code>true</code>,
+<code>false</code>, or omitted.</p>
+<figure><pre><code>{
+    "globals": {
+        "gsap": {
+          "writable": <mark data-message="&quot;globals&quot; descriptor &quot;writable&quot; property must be a boolean" data-code="E167" data-severity="1">0</mark>
+        }
+    }
+}
+</code></pre></figure><p>To fix this error, make the <code>&quot;writable&quot;</code> property <code>true</code> or <code>false</code>:</p>
+<figure><pre><code>{
+    "globals": {
+        "gsap": {
+          "writable": false
+        }
+    }
+}
+</code></pre></figure></article>  <article id='E168'><h2><a class='self-reference' href='#E168'>E168: &quot;globals&quot; must be an object</a></h2><p>In a <a href="https://quick-lint-js.com/config/">quick-lint-js configuration file</a>, <code>&quot;globals&quot;</code> must be an object or
+omitted. It is an error if <code>&quot;globals&quot;</code> is an array, a boolean, a number, a
+string, or <code>null</code>:</p>
+<figure><pre><code>{
+    "globals": <mark data-message="&quot;globals&quot; must be an object" data-code="E168" data-severity="1">[</mark>
+        "ga",
+        "google",
+        "$"
+    ]
+}
+</code></pre></figure><p>To fix this error, make <code>&quot;globals&quot;</code> an object:</p>
+<figure><pre><code>{
+    "globals": {
+        "ga": true,
+        "google": true,
+        "$": true
+    }
+}
+</code></pre></figure></article>  <article id='E169'><h2><a class='self-reference' href='#E169'>E169: &quot;global-groups&quot; must be a boolean or an array</a></h2><p>In a <a href="https://quick-lint-js.com/config/">quick-lint-js configuration file</a>, <code>&quot;global-groups&quot;</code> must be an array of
+strings, a boolean, or omitted. It is an error if <code>&quot;global-groups&quot;</code> is a
+boolean, a number, an object, a string, or <code>null</code>:</p>
+<figure><pre><code>{
+    "global-groups": <mark data-message="&quot;global-groups&quot; must be a boolean or an array" data-code="E169" data-severity="1">{</mark>
+        "ecmascript": true,
+        "browser": true
+    }
+}
+</code></pre></figure><p>To fix this error, make <code>&quot;global-groups&quot;</code> an array:</p>
+<figure><pre><code>{
+    "global-groups": [
+        "ecmascript",
+        "browser"
+    ]
+}
+</code></pre></figure></article>  <article id='E170'><h2><a class='self-reference' href='#E170'>E170: &quot;global-groups&quot; entries must be strings</a></h2><p>In a <a href="https://quick-lint-js.com/config/">quick-lint-js configuration file</a>, items in the <code>&quot;global-groups&quot;</code> array
+must be strings. It is an error if an item is an array, a boolean, a number, an
+object, or <code>null</code>:</p>
+<figure><pre><code>{
+    "global-groups": [
+        "ecmascript",
+        <mark data-message="&quot;global-groups&quot; entries must be strings" data-code="E170" data-severity="1">2020</mark>,
+        "browser"
+    ]
+}
+</code></pre></figure><p>To fix this error, remove non-string items in <code>&quot;global-groups&quot;</code>:</p>
+<figure><pre><code>{
+    "global-groups": [
+        "ecmascript",
+        "browser"
+    ]
+}
+</code></pre></figure></article>  <article id='E171'><h2><a class='self-reference' href='#E171'>E171: &quot;globals&quot; descriptor must be a boolean or an object</a></h2><p>In a <a href="https://quick-lint-js.com/config/">quick-lint-js configuration file</a>, each entry in <code>&quot;globals&quot;</code>
+must be a boolean or a descriptor object. It is an error if a <code>&quot;globals&quot;</code> item
+is an array, a number, a string, or <code>null</code>:</p>
+<figure><pre><code>{
+    "globals": {
+        "gsap": <mark data-message="&quot;globals&quot; descriptor must be a boolean or an object" data-code="E171" data-severity="1">"true"</mark>
+    }
+}
+</code></pre></figure><p>To fix this error, make the <code>&quot;globals&quot;</code> entry <code>true</code> or <code>false</code>:</p>
+<figure><pre><code>{
+    "globals": {
+        "gsap": true
+    }
+}
 </code></pre></figure></article>  <article id='E202'><h2><a class='self-reference' href='#E202'>E202: missing '=' after variable</a></h2><p>The following code has a missing equal '=' after variable name.</p>
 <figure><pre><code>let x<mark data-message="missing '=' after variable" data-code="E202" data-severity="1"></mark> new Array();
 </code></pre></figure><p>To fix this error, add '=' after variable <code>x</code>.</p>

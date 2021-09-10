@@ -26,11 +26,21 @@
     return __reExport(__markAsModule(__defProp(module != null ? __create(__getProtoOf(module)) : {}, "default", module && module.__esModule && "default" in module ? { get: () => module.default, enumerable: true } : { value: module, enumerable: true })), module);
   };
 
-  // node_modules/quick-lint-js-wasm/quick-lint-js.js
+  // wasm/quick-lint-js.js
   var require_quick_lint_js = __commonJS({
-    "node_modules/quick-lint-js-wasm/quick-lint-js.js"(exports) {
+    "wasm/quick-lint-js.js"(exports) {
       "use strict";
-      var VSCODE_WASM_MODULE_PATH = "./dist/quick-lint-js-vscode.wasm";
+      var VSCODE_WASM_MODULE_PATH = "../public/demo/dist/quick-lint-js-vscode.wasm";
+      var LintingCrashed = class extends Error {
+        constructor(originalError) {
+          super(String(originalError));
+          this.originalError = originalError;
+        }
+      };
+      exports.LintingCrashed = LintingCrashed;
+      var DocumentLinterDisposed = class extends Error {
+      };
+      exports.DocumentLinterDisposed = DocumentLinterDisposed;
       async function createProcessFactoryAsync2() {
         if (typeof window === "undefined") {
           let fs = __require("fs");
@@ -105,106 +115,89 @@
           return new Process(wasmInstance);
         }
       };
+      var nextProcessIDForDebugging = 1;
       var Process = class {
         constructor(wasmInstance) {
+          this._idForDebugging = nextProcessIDForDebugging++;
           this._wasmInstance = wasmInstance;
+          this._crashedException = null;
+          let process2 = this;
           function wrap(name) {
+            if (!Object.prototype.hasOwnProperty.call(wasmInstance.exports, name)) {
+              throw new TypeError(`WASM does not export function: ${name}`);
+            }
             let func = wasmInstance.exports[name];
             return (...args) => {
-              exports.maybeInjectFault(name);
               try {
-                return func(...args);
+                exports.maybeInjectFault(process2, name);
+                try {
+                  return func(...args);
+                } catch (e) {
+                  throw new ProcessCrashedWithUnknownError(e);
+                }
               } catch (e) {
-                throw new ProcessCrashedWithUnknownError(e);
+                if (e instanceof ProcessCrashed) {
+                  process2._taint(e);
+                }
+                throw e;
               }
             };
           }
           this._heap = wasmInstance.exports.memory.buffer;
           this._malloc = wrap("malloc");
           this._free = wrap("free");
-          this._vscodeCreateParser = wrap("qljs_vscode_create_parser");
-          this._vscodeDestroyParser = wrap("qljs_vscode_destroy_parser");
-          this._vscodeLint = wrap("qljs_vscode_lint");
-          this._vscodeReplaceText = wrap("qljs_vscode_replace_text");
-          this._webDemoCreateParser = wrap("qljs_web_demo_create_parser");
-          this._webDemoDestroyParser = wrap("qljs_web_demo_destroy_parser");
+          this._webDemoCreateDocument = wrap("qljs_web_demo_create_document");
+          this._webDemoDestroyDocument = wrap("qljs_web_demo_destroy_document");
           this._webDemoLint = wrap("qljs_web_demo_lint");
+          this._webDemoLintAsConfigFile = wrap("qljs_web_demo_lint_as_config_file");
           this._webDemoSetText = wrap("qljs_web_demo_set_text");
         }
-        async createParserForVSCodeAsync() {
-          return new ParserForVSCode(this);
+        isTainted() {
+          return this._crashedException !== null;
         }
-        async createParserForWebDemoAsync() {
-          return new ParserForWebDemo(this);
+        _taint(exception) {
+          this._crashedException = exception;
+          function tainted() {
+            throw this._crashedException;
+          }
+          this._wasmInstance = null;
+          this._heap = null;
+          this._malloc = tainted;
+          this._free = tainted;
+          this._webDemoCreateDocument = tainted;
+          this._webDemoDestroyDocument = tainted;
+          this._webDemoLint = tainted;
+          this._webDemoSetText = tainted;
+        }
+        toString() {
+          return `Process(id=${this._idForDebugging})`;
+        }
+        async createDocumentForWebDemoAsync() {
+          return new DocumentForWebDemo(this);
         }
       };
-      var ParserForVSCode = class {
+      var DocumentForWebDemo = class {
         constructor(process2) {
           this._process = process2;
-          this._parser = this._process._vscodeCreateParser();
-        }
-        replaceText(range, replacementText) {
-          let utf8ReplacementText = encodeUTF8String(replacementText, this._process);
-          try {
-            this._process._vscodeReplaceText(this._parser, range.start.line, range.start.character, range.end.line, range.end.character, utf8ReplacementText.pointer, utf8ReplacementText.byteSize);
-          } finally {
-            utf8ReplacementText.dispose();
-          }
-        }
-        lint() {
-          let diagnosticsPointer = this._process._vscodeLint(this._parser);
-          let rawDiagnosticsU32 = new Uint32Array(this._process._heap, diagnosticsPointer);
-          let rawDiagnosticsPtr = new Uint32Array(this._process._heap, diagnosticsPointer);
-          let ERROR = {
-            message: 0,
-            code: 1,
-            severity: 2,
-            start_line: 3,
-            start_character: 4,
-            end_line: 5,
-            end_character: 6,
-            _ptr_size: 7,
-            _u32_size: 7
-          };
-          let diagnostics = [];
-          for (let i = 0; ; ++i) {
-            let messagePtr = rawDiagnosticsPtr[i * ERROR._ptr_size + ERROR.message];
-            if (messagePtr === 0) {
-              break;
-            }
-            let codePtr = rawDiagnosticsPtr[i * ERROR._ptr_size + ERROR.code];
-            diagnostics.push({
-              code: decodeUTF8CString(new Uint8Array(this._process._heap, codePtr)),
-              message: decodeUTF8CString(new Uint8Array(this._process._heap, messagePtr)),
-              severity: rawDiagnosticsU32[i * ERROR._u32_size + ERROR.severity],
-              startLine: rawDiagnosticsU32[i * ERROR._u32_size + ERROR.start_line],
-              startCharacter: rawDiagnosticsU32[i * ERROR._u32_size + ERROR.start_character],
-              endLine: rawDiagnosticsU32[i * ERROR._u32_size + ERROR.end_line],
-              endCharacter: rawDiagnosticsU32[i * ERROR._u32_size + ERROR.end_character]
-            });
-          }
-          return diagnostics;
-        }
-        dispose() {
-          this._process._vscodeDestroyParser(this._parser);
-          this._parser = null;
-        }
-      };
-      var ParserForWebDemo = class {
-        constructor(process2) {
-          this._process = process2;
-          this._parser = this._process._webDemoCreateParser();
+          this._wasmDoc = this._process._webDemoCreateDocument();
         }
         setText(text) {
           let utf8Text = encodeUTF8String(text, this._process);
           try {
-            this._process._webDemoSetText(this._parser, utf8Text.pointer, utf8Text.byteSize);
+            this._process._webDemoSetText(this._wasmDoc, utf8Text.pointer, utf8Text.byteSize);
           } finally {
             utf8Text.dispose();
           }
         }
         lint() {
-          let diagnosticsPointer = this._process._webDemoLint(this._parser);
+          let diagnosticsPointer = this._process._webDemoLint(this._wasmDoc);
+          return this._parseDiagnostics(diagnosticsPointer);
+        }
+        lintAsConfigFile() {
+          let diagnosticsPointer = this._process._webDemoLintAsConfigFile(this._wasmDoc);
+          return this._parseDiagnostics(diagnosticsPointer);
+        }
+        _parseDiagnostics(diagnosticsPointer) {
           let rawDiagnosticsU32 = new Uint32Array(this._process._heap, diagnosticsPointer);
           let rawDiagnosticsPtr = new Uint32Array(this._process._heap, diagnosticsPointer);
           let ERROR = {
@@ -234,8 +227,8 @@
           return diagnostics;
         }
         dispose() {
-          this._process._webDemoDestroyParser(this._parser);
-          this._parser = null;
+          this._process._webDemoDestroyDocument(this._wasmDoc);
+          this._wasmDoc = null;
         }
       };
       var DiagnosticSeverity = {
@@ -274,7 +267,7 @@
         }
         return new TextDecoder().decode(bytes.subarray(0, nullTerminatorIndex));
       }
-      exports.maybeInjectFault = () => {
+      exports.maybeInjectFault = (_process, _functionName) => {
       };
     }
   });
@@ -368,7 +361,9 @@
             mark.setAttribute("data-code", currentMark.code);
             mark.setAttribute("data-severity", currentMark.severity);
           }
-          if (this._markBeginNode === this._markEndNode.nextSibling) {
+          if (this._markBeginNode === null) {
+            this._editor.appendChild(mark);
+          } else if (this._markEndNode === null || this._markBeginNode === this._markEndNode.nextSibling) {
             if (currentMark.begin !== currentMark.end) {
               throw new Error("Unexpected: markBeginNode comes after markEndNode, but this should only happen if the current mark is empty");
             }
@@ -392,11 +387,7 @@
         if (splitIndex === 0) {
           return currentNode;
         } else if (splitIndex === currentNode.textContent.length) {
-          if (currentNode.nextSibling === null) {
-            throw new Error("Can't happen");
-          } else {
-            return currentNode.nextSibling;
-          }
+          return currentNode.nextSibling;
         } else {
           let nextNode = splitTextNode(currentNode, splitIndex, self._window);
           return nextNode;
@@ -467,12 +458,12 @@
   }
   (0, import_quick_lint_js.createProcessFactoryAsync)().then(async (processFactory) => {
     let process2 = await processFactory.createProcessAsync();
-    let parser = await process2.createParserForWebDemoAsync();
+    let doc = await process2.createDocumentForWebDemoAsync();
     function lintAndUpdate() {
       synchronizeContent();
       let input = codeInputElement.value;
-      parser.setText(input);
-      let marks = parser.lint();
+      doc.setText(input);
+      let marks = doc.lint();
       markEditorText(shadowCodeInputElement, window, marks);
     }
     codeInputElement.addEventListener("input", (event) => {

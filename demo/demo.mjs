@@ -1,7 +1,7 @@
 // Copyright (C) 2020  Matthew "strager" Glazar
 // See end of file for extended copyright information.
 
-import { createProcessFactoryAsync } from "quick-lint-js-wasm/quick-lint-js.js";
+import { createProcessFactoryAsync } from "../../wasm/quick-lint-js.js";
 import { markEditorText } from "./editor.mjs";
 
 let codeInputElement = document.getElementById("code-input");
@@ -19,15 +19,15 @@ if (typeof window.ResizeObserver !== "undefined") {
 createProcessFactoryAsync()
   .then(async (processFactory) => {
     let process = await processFactory.createProcessAsync();
-    let parser = await process.createParserForWebDemoAsync();
+    let doc = await process.createDocumentForWebDemoAsync();
 
     function lintAndUpdate() {
       synchronizeContent();
 
       // TODO(strager): On crash, show the error to the user.
       let input = codeInputElement.value;
-      parser.setText(input);
-      let marks = parser.lint();
+      doc.setText(input);
+      let marks = doc.lint();
       markEditorText(shadowCodeInputElement, window, marks);
     }
     codeInputElement.addEventListener("input", (event) => {
