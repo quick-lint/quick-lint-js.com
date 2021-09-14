@@ -30,7 +30,8 @@
   var require_quick_lint_js = __commonJS({
     "wasm/quick-lint-js.js"(exports) {
       "use strict";
-      var VSCODE_WASM_MODULE_PATH = "../public/demo/dist/quick-lint-js-vscode.wasm";
+      var VSCODE_WASM_MODULE_PATH_BROWSER = "dist/quick-lint-js-vscode.wasm";
+      var VSCODE_WASM_MODULE_PATH_NODE_JS = "../public/demo/dist/quick-lint-js-vscode.wasm";
       var LintingCrashed = class extends Error {
         constructor(originalError) {
           super(String(originalError));
@@ -45,11 +46,11 @@
         if (typeof window === "undefined") {
           let fs = __require("fs");
           let path = __require("path");
-          let wasmCode = await fs.promises.readFile(path.join(__dirname, VSCODE_WASM_MODULE_PATH));
+          let wasmCode = await fs.promises.readFile(path.join(__dirname, VSCODE_WASM_MODULE_PATH_NODE_JS));
           let wasmModule = await WebAssembly.compile(wasmCode);
           return new ProcessFactory(wasmModule);
         } else {
-          let wasmModule = await WebAssembly.compileStreaming(fetch(VSCODE_WASM_MODULE_PATH));
+          let wasmModule = await WebAssembly.compileStreaming(fetch(VSCODE_WASM_MODULE_PATH_BROWSER));
           return new ProcessFactory(wasmModule);
         }
       }

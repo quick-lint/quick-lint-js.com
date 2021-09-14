@@ -834,7 +834,7 @@ between U+0000 and U+10FFFF inclusive.</p>
 </code></pre></figure></article>  <article id='E208'><h2><a class='self-reference' href='#E208'>E208: cannot access private identifier outside class</a></h2><p>The following code is accessing a private identifier outside
 the class.</p>
 <figure><pre><code>class C {
-    #x = 10;
+  #x = 10;
 }
 
 function f(c) {
@@ -843,15 +843,15 @@ function f(c) {
 </code></pre></figure><p>To fix this error, move function <code>f</code> as a static member of
 class <code>C</code> .</p>
 <figure><pre><code>class C {
-    #x = 10;
-    static f(c) {
-      c.#x = 20;
-    }
+  #x = 10;
+  static f(c) {
+    c.#x = 20;
+  }
 }
 </code></pre></figure><p>Another way to fix this error, remove <code>#</code> before variable
 <code>x</code>.</p>
 <figure><pre><code>class C {
-    x = 10;
+  x = 10;
 }
 
 function f(c) {
