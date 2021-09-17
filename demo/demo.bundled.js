@@ -6,9 +6,7 @@
   var __getProtoOf = Object.getPrototypeOf;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
   var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
-  var __require = (x) => {
-    if (typeof require !== "undefined")
-      return require(x);
+  var __require = typeof require !== "undefined" ? require : (x) => {
     throw new Error('Dynamic require of "' + x + '" is not supported');
   };
   var __commonJS = (cb, mod) => function __require2() {
