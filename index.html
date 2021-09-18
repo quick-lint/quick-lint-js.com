@@ -10,9 +10,6 @@
 
 
 
-    <script>
-      //
-    </script>
     <title>quick-lint-js: find JavaScript bugs</title>
     <meta
       name="description"
@@ -68,6 +65,30 @@
       /* Make the table consume less horizontal space. */
       .feature-comparison .editors tr:not(.header) th:first-child {
         font-size: 75%;
+      }
+
+      /* Make the entire cell clickable. (How does this even work???) */
+      .feature-comparison table {
+        height: 0;
+      }
+      .feature-comparison td.has-link {
+        height: 100%;
+        padding: 0;
+      }
+      .feature-comparison td.has-link > a {
+        align-items: center;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        text-decoration: none;
+      }
+      .feature-comparison td.has-link > a:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+      @media (prefers-color-scheme: dark) {
+        .feature-comparison td.has-link > a:hover {
+          background-color: rgba(255, 255, 255, 0.3);
+        }
       }
 
       .install-options {
@@ -446,10 +467,14 @@
               <th><a href="https://rome.tools/">Rome</a></th>
             </tr>
             <tr>
-              <th>VS Code</th>
-              <th><img class="plugin-logo" src="vscode.png" alt="" /></th>
-              <td class="good quick-lint-js">
-                <span aria-label="yes">✅</span>
+              <th class="has-link"><a href="install/vscode/">VS Code</a></th>
+              <th class="has-link">
+                <a href="install/vscode/"
+                  ><img class="plugin-logo" src="vscode.png" alt=""
+                /></a>
+              </th>
+              <td class="good quick-lint-js has-link">
+                <a href="install/vscode/" aria-label="yes">✅</a>
               </td>
               <td class="good"><span aria-label="yes">✅</span></td>
               <td class="good"><span aria-label="yes">✅</span></td>
@@ -458,10 +483,14 @@
               <td class="good"><span aria-label="yes">✅</span></td>
             </tr>
             <tr>
-              <th>Vim</th>
-              <th><img class="plugin-logo" src="vim.gif" alt="" /></th>
-              <td class="good quick-lint-js">
-                <span aria-label="yes">✅</span>
+              <th class="has-link"><a href="install/vim/">Vim</a></th>
+              <th class="has-link">
+                <a href="install/vim/"
+                  ><img class="plugin-logo" src="vim.gif" alt=""
+                /></a>
+              </th>
+              <td class="good quick-lint-js has-link">
+                <a href="install/vim/" aria-label="yes">✅</a>
               </td>
               <td class="good"><span aria-label="yes">✅</span></td>
               <td class="good"><span aria-label="yes">✅</span></td>
@@ -543,9 +572,11 @@
               <td class="bad"><span aria-label="no">❌</span></td>
             </tr>
             <tr>
-              <th colspan="2">LSP server</th>
-              <td class="good quick-lint-js">
-                <span aria-label="yes">✅</span>
+              <th colspan="2" class="has-link">
+                <a href="install/cli/">LSP server</a>
+              </th>
+              <td class="good quick-lint-js has-link">
+                <a href="install/cli/" aria-label="yes">✅</a>
               </td>
               <td class="good"><span aria-label="yes">✅</span></td>
               <td class="bad"><span aria-label="no">❌</span></td>
