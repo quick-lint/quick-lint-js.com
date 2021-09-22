@@ -605,7 +605,7 @@ fs.readFile(path, (err, data) =&gt; {
   console.log(data);
 });
 </code></pre></figure></article>  <article id='E077'><h2><a class='self-reference' href='#E077'>E077: function call before declaration in blocked scope</a></h2><p>A function can't be called before its declaration in block scope <em>in Safari</em>.</p>
-<figure><pre><code><mark data-message="function called before declaration in blocked scope: f" data-code="E077" data-severity="2">f</mark>();
+<figure><pre><code><mark data-message="function called before declaration in block scope: f" data-code="E077" data-severity="2">f</mark>();
 {
     function f() {}
 }
